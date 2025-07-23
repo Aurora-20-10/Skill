@@ -1,56 +1,110 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>Quản Lý Kỹ Năng Cá Nhân</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <title>Hệ Phản Xạ Chiến Lược Cá Nhân – T-04 / T-05</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <h1>Quản Lý Kỹ Năng Cá Nhân</h1>
+  <header>
+    <h1>🌌 Hệ Phản Xạ Chiến Lược Cá Nhân</h1>
+    <p class="subtitle">Điều phối kỹ năng – bản thể – vận mệnh sống</p>
+  </header>
 
+  <!-- MODULE: SKILL MANAGER -->
   <section>
-    <h2>📘 Bảng Kỹ Năng</h2>
-    <table id="skillTable">
-      <thead>
-        <tr>
-          <th>Kỹ năng</th>
-          <th>Phân loại</th>
-          <th>Loại kỹ năng</th>
-          <th>Cấp độ</th>
-          <th>Ghi chú</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-    <button onclick="addSkill()">+ Thêm kỹ năng</button>
+    <h2>📘 Kỹ Năng Chiến Lược Cá Nhân</h2>
+    <button onclick="openSkillForm()">+ Thêm kỹ năng</button>
+    <div id="skillCardsContainer">
+
+      <!-- MẪU SKILL CARD -->
+      <div class="skill-card">
+        <h3>🛠️ Phân tích logic</h3>
+
+        <div class="skill-section">
+          <strong>Loại:</strong> Hard |
+          <strong>Level:</strong> 3/5 |
+          <strong>Tiến độ:</strong> 60%
+        </div>
+
+        <div class="skill-section">
+          <strong>Persona:</strong> T-04 |
+          <strong>Chiến lược:</strong> Tự lực |
+          <strong>Khả năng lõi:</strong> Phân tích vi mô
+        </div>
+
+        <div class="skill-section">
+          <strong>Mục tiêu gắn:</strong> Tăng ảnh hưởng tầng lý trí |
+          <strong>Đối tượng:</strong> Crush / Leader |
+          <strong>Trường hệ:</strong> Nhận thức
+        </div>
+
+        <div class="skill-section">
+          <strong>Chiến trường:</strong> Đàm phán lạnh |
+          <strong>Vai trò:</strong> Gài mồi / Phản chiếu |
+          <strong>Chế độ kích hoạt:</strong> Khi bị công kích
+        </div>
+
+        <div class="skill-section">
+          <strong>Năng lượng:</strong> Rút nội lực |
+          <strong>Nhịp luyện:</strong> 2 lần/tuần |
+          <strong>Thời điểm tối ưu:</strong> Đêm – khi tĩnh
+        </div>
+
+        <details class="skill-details">
+          <summary>📂 Chi tiết thêm</summary>
+          <p><strong>Mô tả:</strong> Dùng để giải mã đối tượng qua phản ứng nhỏ.</p>
+          <p><strong>Ghi chú chiến lược:</strong> Luyện quan sát ánh mắt, phản ứng.</p>
+          <p><strong>Ghi chú cá nhân:</strong> Dùng xong thường kiệt sức nhưng dẫn hướng cao.</p>
+        </details>
+
+        <div class="skill-actions">
+          <button onclick="editSkill('...')">✏️ Sửa</button>
+          <button onclick="deleteSkill('...')">🗑 Xoá</button>
+        </div>
+      </div>
+      <!-- Kết thúc mẫu -->
+
+    </div>
   </section>
 
+  <!-- MODULE: DASHBOARD -->
   <section>
-    <h2>🎯 Tình Huống Áp Dụng</h2>
+    <h2>📊 Dashboard Phản Xạ</h2>
+    <div id="dashboardContainer">
+      <p>(Biểu đồ bản thể – trọng số – gap – năng lượng...)</p>
+    </div>
+  </section>
+
+  <!-- MODULE: COMBAT LOG -->
+  <section>
+    <h2>⚔️ Tình Huống Thực Chiến</h2>
+    <button onclick="addUseCase()">+ Ghi chiến trận</button>
     <table id="useCases">
       <thead>
         <tr>
           <th>Ngày</th>
+          <th>Kỹ năng dùng</th>
           <th>Tình huống</th>
-          <th>Kỹ năng</th>
-          <th>Điểm hiệu quả</th>
-          <th>Ghi chú</th>
+          <th>Phản ứng</th>
+          <th>Kết quả</th>
+          <th>Bài học</th>
         </tr>
       </thead>
       <tbody></tbody>
     </table>
-    <button onclick="addUseCase()">+ Thêm tình huống</button>
   </section>
 
+  <!-- MODULE: PHÂN TÍCH CÁ NHÂN -->
   <section>
-    <h2>📊 Tiến Độ Kỹ Năng</h2>
-    <div id="progressContainer"></div>
+    <h2>🧠 Tự Phân Tầng – Nhận Thức – Lệch Trục</h2>
+    <textarea id="reflectionNotes" placeholder="Ghi nhận cảm giác, nhận thức chiến lược, lệch bản thể nếu có..."></textarea>
   </section>
 
-  <section>
-    <h2>🧾 Ghi chú phân tích</h2>
-    <textarea id="reflectionNotes" placeholder="Tự nhận xét sau 1 tuần / tháng..."></textarea>
-  </section>
+  <!-- POPUP FORM -->
+  <div id="skillFormPopup" class="hidden">
+    <!-- Sẽ render JS -->
+  </div>
 
   <script src="script.js"></script>
 </body>
