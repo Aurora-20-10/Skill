@@ -125,11 +125,13 @@ function buildClusterDashboard() {
 function countBy(field){const m={};skillData.forEach(s=>{const k=s[field]||"Chưa xđ";m[k]=(m[k]||0)+1});return m;}
 function renderChart(canvasId, type, countMap, color) {
   const ctx = document.getElementById(canvasId).getContext("2d");
-  if (!ctx) return;
-  const old = window[canvasId];
-  if (old) old.destroy();
+  let old = window[canvasId];
+  if (old && typeof old.destroy === 'function') {
+    old.destroy();
+  }
+
   window[canvasId] = new Chart(ctx, {
-    type: type === "barY" ? "bar" : type,
+    type,
     data: {
       labels: Object.keys(countMap),
       datasets: [{
