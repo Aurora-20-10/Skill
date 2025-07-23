@@ -127,7 +127,8 @@ function populateClusterSelect() {
 // === KHỞI TẠO ===
 document.addEventListener("DOMContentLoaded", () => {
   renderSkills();
-  renderPersonaChart();
+  renderPersonaChart();         // ✅ Biểu đồ Persona
+  buildClusterDashboard();      // ✅ Biểu đồ Trụ chiến lược
   populateClusterSelect();
   populateClusterFilter();
 });
@@ -260,7 +261,8 @@ function populateClusterSelect() {
 // === KHỞI TẠO ===
 document.addEventListener("DOMContentLoaded", () => {
   renderSkills();
-  buildClusterDashboard();
+  renderPersonaChart();         // ✅ Biểu đồ Persona
+  buildClusterDashboard();      // ✅ Biểu đồ Trụ chiến lược
   populateClusterSelect();
   populateClusterFilter();
 });
