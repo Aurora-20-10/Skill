@@ -1,0 +1,142 @@
+/* === RESET CƠ BẢN === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: #f8f9fa;
+  color: #222;
+  padding: 30px;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+
+section {
+  margin-top: 40px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+button {
+  background: #2e86de;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  margin-top: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1b4f72;
+}
+
+/* === SKILL CARD === */
+.skill-card {
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.skill-card h3 {
+  font-size: 18px;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.skill-section {
+  margin-bottom: 6px;
+  color: #333;
+  font-size: 15px;
+}
+
+.skill-details {
+  background: #f4f6f9;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.skill-actions {
+  margin-top: 10px;
+}
+
+.skill-actions button {
+  margin-right: 8px;
+}
+
+/* === AUDIT BLOCK === */
+.audit-block {
+  margin-bottom: 25px;
+}
+
+.audit-block textarea,
+.audit-block select,
+.audit-block input[type="text"],
+.audit-block input[type="date"] {
+  width: 100%;
+  padding: 8px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.audit-block ul {
+  margin-left: 20px;
+  margin-top: 8px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* === TABLE (Combat Log) === */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+table th,
+table td {
+  border: 1px solid #dee2e6;
+  padding: 10px;
+  text-align: left;
+}
+
+table th {
+  background-color: #f0f2f5;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+/* === DASHBOARD PLACEHOLDER === */
+#dashboardContainer {
+  min-height: 120px;
+  background: #fefefe;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  color: #999;
+  font-style: italic;
+}
+
+/* === POPUP HIDDEN === */
+.hidden {
+  display: none;
+}
