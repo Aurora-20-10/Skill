@@ -262,3 +262,51 @@ document.addEventListener("DOMContentLoaded", () => {
   populateClusterSelect();
   populateClusterFilter();
 });
+
+function buildClusterDashboard() {
+  const clusterCount = {};
+  for (const k in K_MAP) clusterCount[k] = 0;
+
+  skillData.forEach(skill => {
+    (skill.skillCluster || []).forEach(k => {
+      if (clusterCount[k] !== undefined) clusterCount[k]++;
+    });
+  });
+
+  const ctx = document.getElementById("clusterChart").getContext("2d");
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: Object.keys(K_MAP),
+      datasets: [{
+        label: "Số lượng kỹ năng",
+        data: Object.values(clusterCount),
+        backgroundColor: "#4b91e2",
+      }]
+    },
+    options: {
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            title: (items) => `${items[0].label} – ${K_MAP[items[0].label]}`,
+          }
+        }
+      },
+      scales: {
+        x: { ticks: { autoSkip: false, maxRotation: 60, minRotation: 30 } },
+        y: { beginAtZero: true }
+      }
+    }
+  });
+
+  const missing = Object.entries(clusterCount)
+    .filter(([_, count]) => count === 0)
+    .map(([k]) => `<li><strong>${k}</strong> – ${K_MAP[k]}</li>`);
+
+  const report = missing.length > 0
+    ? `<p><strong>⚠️ Các trụ chưa có kỹ năng:</strong></p><ul>${missing.join("")}</ul>`
+    : `<p>✅ Tất cả trụ đều có ít nhất một kỹ năng.</p>`;
+
+  document.getElementById("clusterGapReport").innerHTML = report;
+}
