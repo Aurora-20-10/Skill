@@ -279,3 +279,33 @@ function importCSV() {
 
   reader.readAsText(file);
 }
+
+document.getElementById("personaSelector").addEventListener("change", function () {
+  const selectedPersona = this.value;
+  const container = document.getElementById("personaSkillCards");
+  container.innerHTML = "";
+
+  if (!selectedPersona) return;
+
+  const matchedSkills = skills.filter(skill =>
+    skill.personaMain === selectedPersona || skill.personaSupport === selectedPersona
+  );
+
+  if (matchedSkills.length === 0) {
+    container.innerHTML = `<p>Không tìm thấy kỹ năng cho persona này.</p>`;
+    return;
+  }
+
+  matchedSkills.forEach(skill => {
+    const flowSteps = (skill.flow || []).map((f, i) => `<li><strong>B${i + 1}:</strong> ${f}</li>`).join("");
+    const div = document.createElement("div");
+    div.className = "skill-card";
+    div.innerHTML = `
+      <h3>🎯 ${skill.name}</h3>
+      <p><strong>Flow:</strong></p>
+      <ul>${flowSteps}</ul>
+      <p><strong>Chiến thuật:</strong> ${skill.core || "Không có ghi chú chiến lược."}</p>
+    `;
+    container.appendChild(div);
+  });
+});
