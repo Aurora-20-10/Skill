@@ -211,7 +211,7 @@ function clearAllFilters() {
   const selects = document.querySelectorAll("select");
   selects.forEach(select => select.selectedIndex = 0);
 
-  const inputs = document.querySelectorAll("input[type='text'], textarea');
+const inputs = document.querySelectorAll("input[type='text'], textarea");
   inputs.forEach(input => input.value = "");
 }
 </script>
