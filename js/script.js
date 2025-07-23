@@ -4,7 +4,6 @@
 // ==============================================
 
 import K_MAP from "./KMapping.js";
-import Chart from "https://cdn.jsdelivr.net/npm/chart.js@4.4.0/+esm"; // Chart.js v4 ES‑module
 
 // ---------- 1. DATA --------------------------------------------------
 //   • Nếu localStorage rỗng → nạp bộ mẫu (defaultSkillData)
