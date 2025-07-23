@@ -173,4 +173,43 @@ document.addEventListener("DOMContentLoaded",()=>{
   renderAllCharts();
   populateClusterSelect();
   populateClusterFilter();
+  populateAdvancedFilters();
 });
+
+function populateAdvancedFilters() {
+  const pSel = document.getElementById("filterPhase");
+  const rSel = document.getElementById("filterRole");
+  const cSel = document.getElementById("filterCore");
+  const kSel = document.getElementById("filterCluster");
+
+  const unique = (field) => [...new Set(skillData.map(s => s[field]))].sort();
+
+  if (pSel) unique("phase").forEach(v => pSel.add(new Option(v, v)));
+  if (rSel) unique("role").forEach(v => rSel.add(new Option(v, v)));
+  if (cSel) unique("core").forEach(v => cSel.add(new Option(v, v)));
+  if (kSel) for (const k in K_MAP) kSel.add(new Option(`${k} – ${K_MAP[k]}`, k));
+
+  [pSel, rSel, cSel, kSel].forEach(sel => sel && sel.addEventListener("change", applyAdvancedFilters));
+}
+
+function applyAdvancedFilters() {
+  const phase = document.getElementById("filterPhase").value;
+  const role = document.getElementById("filterRole").value;
+  const core = document.getElementById("filterCore").value;
+  const cluster = document.getElementById("filterCluster").value;
+
+  const filtered = skillData.filter(s =>
+    (!phase   || s.phase === phase) &&
+    (!role    || s.role  === role) &&
+    (!core    || s.core  === core) &&
+    (!cluster || (s.skillCluster || []).includes(cluster))
+  );
+
+  renderSkills(filtered);
+}
+
+function clearAllFilters() {
+  ["filterPhase", "filterRole", "filterCore", "filterCluster"]
+    .forEach(id => document.getElementById(id).value = "");
+  renderSkills();
+}
