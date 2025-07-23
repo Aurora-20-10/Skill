@@ -163,6 +163,36 @@ function renderAllCharts() {
   );
 }
 
+function renderClusterCheckboxes() {
+  const box = document.getElementById("clusterCheckboxes");
+  if (!box) return;
+  box.innerHTML = "<strong>Trụ kỹ năng:</strong><br>";
+  for (const k in K_MAP) {
+    const id = `clust-${k}`;
+    box.innerHTML += `<label><input type="checkbox" id="${id}" value="${k}"> ${k}</label> `;
+  }
+}
+
+function addSkill() {
+  const name  = document.getElementById("skillName").value.trim();
+  const phase = document.getElementById("phaseSelect").value;
+  const role  = document.getElementById("roleSelect").value;
+  const core  = document.getElementById("coreInput").value.trim();
+  const clusterEls = document.querySelectorAll("#clusterCheckboxes input:checked");
+  const clusters = Array.from(clusterEls).map(e => e.value);
+
+  if (!name || !phase || !role || !core)
+    return alert("Điền đầy đủ thông tin.");
+
+  skillData.push({ name, phase, role, core, skillCluster: clusters });
+  saveSkills();
+  renderSkills();
+  buildClusterDashboard();
+  renderAllCharts();
+  alert("✔️ Đã thêm kỹ năng.");
+}
+
+
 // ---------- 6. EXPORT CSV -------------------------------------------
 function exportSkillsToCSV(){if(!skillData.length)return alert("Không có dữ liệu");const head=["Name","Phase","Role","Core","Clusters"];const rows=skillData.map(s=>[s.name,s.phase,s.role,s.core,(s.skillCluster||[]).join(";")]);const csv=[head,...rows].map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(",")).join("\n");const url=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));const a=document.createElement("a");a.href=url;a.download="skills.csv";a.click();URL.revokeObjectURL(url);}  
 
@@ -174,6 +204,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   populateClusterSelect();
   populateClusterFilter();
   populateAdvancedFilters();
+  renderClusterCheckboxes(); 
 });
 
 function populateAdvancedFilters() {
