@@ -213,3 +213,38 @@ function clearAllFilters() {
     .forEach(id => document.getElementById(id).value = "");
   renderSkills();
 }
+
+function importCSV() {
+  const input = document.getElementById("importCSV");
+  const file = input.files[0];
+  if (!file) return alert("Chọn một file CSV trước.");
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const lines = e.target.result.split("\n").map(l => l.trim()).filter(Boolean);
+    const headers = lines[0].replace(/"/g, '').split(",");
+    const newSkills = [];
+
+    for (let i = 1; i < lines.length; i++) {
+      const row = lines[i].match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
+      if (!row || row.length < 5) continue;
+      const [name, phase, role, core, clusters] = row.map(cell => cell.replace(/(^"|"$)/g, ""));
+      newSkills.push({
+        name, phase, role, core,
+        skillCluster: clusters.split(";").map(k => k.trim()).filter(Boolean)
+      });
+    }
+
+    if (!confirm(`⚠️ Ghi đè toàn bộ ${skillData.length} kỹ năng hiện tại?`)) return;
+
+    skillData = newSkills;
+    saveSkills();
+    renderSkills();
+    buildClusterDashboard();
+    renderAllCharts();
+    populateAdvancedFilters();
+    alert("✔️ Đã nhập dữ liệu từ CSV.");
+  };
+
+  reader.readAsText(file);
+}
