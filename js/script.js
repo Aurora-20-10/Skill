@@ -2,7 +2,51 @@
 
 import K_MAP from './KMapping.js';
 
-let skillData = JSON.parse(localStorage.getItem("skillData")) || [];
+Tôi đã có sẵn 24 kỹ năng chiến lược (K1–K24) chia theo 4 trục logic: phase, role, core, và skillCluster.
+Mỗi kỹ năng là một object như sau:
+const skillData = [
+  { name: "Chiến lược ngôn ngữ (EN)", phase: "Tự lực", role: "Dẫn dụ", core: "Thao túng ngôn từ để chiếm quyền lực giao tiếp chiến lược", skillCluster: ["K1"] },
+  { name: "Thông dịch & quan hệ TQ", phase: "Gây ảnh hưởng", role: "Gài mồi", core: "Cài thông tin chính trị – thương mại qua ngôn ngữ mềm", skillCluster: ["K2"] },
+  { name: "Định vị kinh tế vĩ mô", phase: "Gây ảnh hưởng", role: "Quan sát", core: "Đọc được dòng tiền – dự đoán vận động quốc gia", skillCluster: ["K3"] },
+  { name: "Tự chủ tài chính cá nhân", phase: "Tự lực", role: "Phản chiếu", core: "Nhận diện sai lầm tài chính – điều chỉnh dòng tiền sống", skillCluster: ["K4"] },
+  { name: "Tự vệ pháp lý & phản đòn", phase: "Tự lực", role: "Kết liễu", core: "Kích hoạt cơ chế bảo vệ và tấn công đúng luật chơi", skillCluster: ["K5"] },
+  { name: "Chiến lược sản phẩm & thị trường", phase: "Gây ảnh hưởng", role: "Dẫn dụ", core: "Thiết kế hệ giá trị hút khách & chốt sale bằng insight", skillCluster: ["K6"] },
+  { name: "Đọc – điều phối tâm lý người", phase: "Gây ảnh hưởng", role: "Gài mồi", core: "Dò tâm trạng – cấy phản ứng – điều phối hành vi vi mô", skillCluster: ["K7"] },
+  { name: "Tự động hóa – sao lưu bản thể", phase: "Tự lực", role: "Ẩn thân", core: "Dựng hệ phản xạ kỹ thuật số để tồn tại không cần xuất hiện", skillCluster: ["K8"] },
+  { name: "Hồi phục sinh học – dưỡng thân", phase: "Tự lực", role: "Phản chiếu", core: "Theo dõi chu kỳ – tự điều chỉnh trước khi gãy trục sinh học", skillCluster: ["K9"] },
+  { name: "Định hình logic sống – phản tư", phase: "Tự lực", role: "Quan sát", core: "Xoay lại trục sống bằng phản tư – tránh lệch hệ", skillCluster: ["K10"] },
+  { name: "Giải mã quyền lực & bối cảnh", phase: "Gây ảnh hưởng", role: "Phản chiếu", core: "Thấy được trục vận hành hệ thống và vai trò bản thân", skillCluster: ["K11"] },
+  { name: "Bảo vệ khí – xử lý nhiễu tầng", phase: "Điều phối", role: "Kết liễu", core: "Dứt điểm các nguồn rút khí – giữ sạch trường sống", skillCluster: ["K12"] },
+  { name: "Sinh tồn & phản ứng khi bị cô lập", phase: "Tự lực", role: "Ẩn thân", core: "Giữ trụ bản thể trong môi trường không ai cứu viện", skillCluster: ["K13"] },
+  { name: "Mỹ cảm chiến lược – tạo khí chất", phase: "Gây ảnh hưởng", role: "Dẫn dụ", core: "Kích hoạt trường khí quyến rũ bằng tầng thẩm mỹ sâu", skillCluster: ["K14"] },
+  { name: "Ngôn từ sát thương cao", phase: "Gây ảnh hưởng", role: "Phản chiếu", core: "Phóng ra ngôn từ làm lệch trục người khác mà không động tay", skillCluster: ["K15"] },
+  { name: "Biến trải nghiệm thành ảnh hưởng", phase: "Gây ảnh hưởng", role: "Gài mồi", core: "Gói trải nghiệm sống thành tài sản gây tín nhiệm tầng cao", skillCluster: ["K16"] },
+  { name: "Điều chỉnh gene – phản xạ sinh học", phase: "Tự lực", role: "Quan sát", core: "Nhận diện lệch phản xạ – điều chỉnh lại phản ứng vật lý", skillCluster: ["K17"] },
+  { name: "Tái lập hành vi – cắt chu kỳ tổn thương", phase: "Tự lực", role: "Kết liễu", core: "Phá bỏ phản xạ cũ – thiết lập cơ chế phản ứng mới", skillCluster: ["K18"] },
+  { name: "Thiết kế hệ sống cá nhân", phase: "Điều phối", role: "Dẫn dụ", core: "Xây được mô hình sống – hệ thống vận hành mà không phải chạy tay", skillCluster: ["K19"] },
+  { name: "Siêu học – Meta-learning", phase: "Tự lực", role: "Gài mồi", core: "Cấy mô hình học tự động – ghi nhớ & truy xuất không lệch tầng", skillCluster: ["K20"] },
+  { name: "Chiến lược dữ liệu & phân tích", phase: "Gây ảnh hưởng", role: "Quan sát", core: "Ra quyết định từ dữ liệu – không dính nhiễu cảm xúc", skillCluster: ["K21"] },
+  { name: "Kết nối chiến lược – không gồng", phase: "Gây ảnh hưởng", role: "Dẫn dụ", core: "Gặp người đúng tầng mà không cần tìm – tự tạo hấp dẫn tầng cao", skillCluster: ["K22"] },
+  { name: "Điều phối cảm xúc bằng âm thanh", phase: "Điều phối", role: "Phản chiếu", core: "Chuyển hóa cảm xúc và luân xa thành vũ khí điều hướng tình huống", skillCluster: ["K23"] },
+  { name: "Chiến lược định hình thế kỷ", phase: "Điều phối", role: "Quan sát", core: "Nhận diện vận động thời đại – can thiệp đúng chu kỳ chuyển hóa", skillCluster: ["K24"] }
+];
+  name: "Tên kỹ năng",
+  phase: "Trục phát triển (Tự lực / Gây ảnh hưởng / Điều phối)",
+  role: "Chiến thuật (Dẫn dụ / Gài mồi / Quan sát / Phản chiếu / Ẩn thân / Kết liễu)",
+  core: "Mô tả lõi chiến lược của kỹ năng",
+  skillCluster: ["K1", "K2", ...] // để nhóm lại theo các trụ hoặc cụm
+}
+Tôi cần sử dụng mảng skillData gồm 24 object này để:
+
+hiển thị từng kỹ năng trong giao diện web,
+
+lọc, phân loại theo phase, role, hoặc skillCluster,
+
+hỗ trợ đánh giá năng lực cá nhân theo nhóm kỹ năng đang có/đang thiếu.
+
+Đây là đoạn skillData đã dựng sẵn, chỉ cần tích hợp vào web:
+
+
 let auditData = JSON.parse(localStorage.getItem("auditData")) || {};
 
 function saveSkills() {
