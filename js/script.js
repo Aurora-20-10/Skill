@@ -504,3 +504,52 @@ function renderCoreChart() {
     }
   });
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+  renderAllCharts();
+});
+
+function countByKey(key) {
+  const count = {};
+  skillData.forEach(item => {
+    count[item[key]] = (count[item[key]] || 0) + 1;
+  });
+  return count;
+}
+
+function renderAllCharts() {
+  renderBarChart("personaChart", countByKey("skillCluster"), "Tổng kỹ năng theo trụ");
+  renderBarChart("phaseChart", countByKey("phase"), "Tổng kỹ năng theo Phase");
+  renderBarChart("roleChart", countByKey("role"), "Tổng kỹ năng theo Role");
+}
+
+function renderBarChart(canvasId, dataMap, label) {
+  const ctx = document.getElementById(canvasId);
+  if (!ctx) return;
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: Object.keys(dataMap),
+      datasets: [{
+        label: label,
+        data: Object.values(dataMap),
+        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            precision: 0
+          }
+        }
+      }
+    }
+  });
+}
