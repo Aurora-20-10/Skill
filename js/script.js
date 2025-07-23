@@ -87,18 +87,40 @@ function populateClusterFilter() {
 
 // ---------- 4. DASHBOARD TRỤ K --------------------------------------
 function buildClusterDashboard() {
-  const count = Object.fromEntries(Object.keys(K_MAP).map(k => [k,0]));
-  skillData.forEach(s => (s.skillCluster||[]).forEach(k => count[k]++));
+  const count = Object.fromEntries(Object.keys(K_MAP).map(k => [k, 0]));
+
+  skillData.forEach(s =>
+    (s.skillCluster || []).forEach(k => count[k]++)
+  );
 
   const ctx = document.getElementById("clusterChart").getContext("2d");
-if (window.clusterChart && typeof window.clusterChart.destroy === "function") {
-    window.clusterChart.destroy();
-}
-  window.clusterChart = new Chart(ctx,{type:"bar",data:{labels:Object.keys(K_MAP),datasets:[{data:Object.values(count),backgroundColor:"#4b91e2"}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}});
 
-  const miss = Object.entries(count).filter(([_,c])=>c===0).map(([k])=>`<li>${k} – ${K_MAP[k]}</li>`);
-  document.getElementById("clusterGapReport").innerHTML = miss.length ? `⚠️ Thiếu trụ:<ul>${miss.join("")}</ul>` : "✅ Đủ trụ";
+  // FIX LỖI: kiểm tra tồn tại và có phương thức destroy không
+  if (window.clusterChart && typeof window.clusterChart.destroy === "function") {
+    window.clusterChart.destroy();
+  }
+
+  window.clusterChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: Object.keys(K_MAP),
+      datasets: [{
+        data: Object.values(count),
+        backgroundColor: "#64b5f6"
+      }]
+    }
+  });
+
+  const miss = Object.entries(count)
+    .filter(([_, c]) => c === 0)
+    .map(([k]) => `<li>${k} – ${K_MAP[k]}</li>`);
+
+  document.getElementById("clusterGapReport").innerHTML =
+    miss.length
+      ? `⚠️ Thiếu trụ:<ul>${miss.join("")}</ul>`
+      : `✅ Đủ trụ`;
 }
+
 
 // ---------- 5. CHART HELPERS ----------------------------------------
 function countBy(field){const m={};skillData.forEach(s=>{const k=s[field]||"Chưa xđ";m[k]=(m[k]||0)+1});return m;}
