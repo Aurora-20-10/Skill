@@ -150,15 +150,14 @@ function renderChart(canvasId, type, countMap, color) {
 }
 
 function renderAllCharts() {
-renderChart("personaChart", "doughnut", countBy("persona"),
-  Object.keys(countBy("persona")).map(() => `hsl(${Math.random() * 360}, 70%, 70%)`)
-);
+  renderChart("personaChart", "doughnut", countBy("persona"),
+    Object.keys(countBy("persona")).map(() => `hsl(${Math.random() * 360}, 70%, 70%)`)
+  );
   renderChart("phaseChart", "bar", countBy("phase"), "#88C34A");
   renderChart("roleChart", "barY", countBy("role"), "#FF9800");
-  renderChart("coreChart", "pie", countBy("core"), 
-Object.keys(countBy("core")).map(() => `hsl(${Math.random() * 360}, 60%, 70%)`)
-}
-
+  renderChart("coreChart", "pie", countBy("core"),
+    Object.keys(countBy("core")).map(() => `hsl(${Math.random() * 360}, 60%, 70%)`)
+  );
 }
 
 // ---------- 6. EXPORT CSV -------------------------------------------
