@@ -16,38 +16,55 @@
   <section>
     <h2>📘 Kỹ Năng Chiến Lược Cá Nhân</h2>
     <button onclick="openSkillForm()">+ Thêm kỹ năng</button>
-  <!-- Bộ lọc kỹ năng theo trụ K -->
-  <div class="filter-section">
-    <label for="clusterFilter">Lọc theo trụ kỹ năng:</label>
-    <select id="clusterFilter">
-      <option value="">-- Tất cả --</option>
-    </select>
-  </div>
+
+    <!-- Bộ lọc kỹ năng theo trụ K -->
+    <div class="filter-section">
+      <label for="clusterFilter">Lọc theo trụ kỹ năng:</label>
+      <select id="clusterFilter">
+        <option value="">-- Tất cả --</option>
+      </select>
+    </div>
 
     <div class="export-tools" style="text-align: right; margin-bottom: 10px;">
-  <button onclick="exportSkillsToCSV()">📤 Xuất CSV</button>
-</div>
-
-    <div id="skillCardsContainer">
-    <!-- ✅ Biểu đồ phân loại theo Persona -->
-<section id="chartSection">
-  <h3>📊 Biểu đồ kỹ năng theo Persona</h3>
-  <canvas id="personaChart" height="200"></canvas>
+      <button onclick="exportSkillsToCSV()">📤 Xuất CSV</button>
     </div>
+
+    <div id="skillCardsContainer"></div>
+
+    <!-- ✅ Biểu đồ phân loại theo Persona -->
+    <section id="chartSection">
+      <h3>📊 Biểu đồ kỹ năng theo Persona</h3>
+      <canvas id="personaChart" height="200"></canvas>
+    </section>
+
+    <!-- ✅ Thêm 3 biểu đồ phân tích -->
+    <section>
+      <h3>📊 Phase Analysis</h3>
+      <canvas id="phaseChart" height="120"></canvas>
+      <div id="phaseWarning" class="chart-warning" style="color: #d48806; margin-top: 10px; display: none;"></div>
+    </section>
+
+    <section>
+      <h3>⚔️ Role Analysis</h3>
+      <canvas id="roleChart" height="180"></canvas>
+      <div id="roleWarning" class="chart-warning" style="color: #d48806; margin-top: 10px; display: none;"></div>
+    </section>
+
+    <section>
+      <h3>🧠 Core Competency Analysis</h3>
+      <canvas id="coreChart" height="120"></canvas>
+      <div id="coreWarning" class="chart-warning" style="color: #d48806; margin-top: 10px; display: none;"></div>
+    </section>
   </section>
 
-  
-<!-- MODULE: DASHBOARD -->
-<section>
-  <h2>📊 Dashboard Phản Xạ</h2>
-
-  <!-- Biểu đồ trụ kỹ năng -->
-  <div id="dashboardContainer">
-    <canvas id="clusterChart" width="800" height="400"></canvas>
-    <div id="clusterGapReport" style="margin-top: 20px;"></div>
-  </div>
-</section>
-
+  <!-- MODULE: DASHBOARD -->
+  <section>
+    <h2>📊 Dashboard Phản Xạ</h2>
+    <div id="dashboardContainer">
+      <canvas id="clusterChart" width="800" height="400"></canvas>
+      <div id="clusterGapReport" style="margin-top: 20px;"></div>
+    </div>
+  </section>
 
   <!-- MODULE: COMBAT LOG -->
   <section>
