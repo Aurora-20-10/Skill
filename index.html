@@ -15,6 +15,39 @@
   <!-- MODULE: SKILL MANAGER -->
   <section>
     <h2>📘 Kỹ Năng Chiến Lược Cá Nhân</h2>
+
+<h3>➕ Thêm kỹ năng mới</h3>
+<form id="addSkillForm">
+  <input type="text" id="name" placeholder="Tên kỹ năng" required><br>
+
+  <label>Phase:</label>
+  <select id="phase" required>
+    <option value="">-- Chọn phase --</option>
+    <option value="Tự lực">Tự lực</option>
+    <option value="Gây ảnh hưởng">Gây ảnh hưởng</option>
+    <option value="Điều phối">Điều phối</option>
+  </select><br>
+
+  <label>Role:</label>
+  <select id="role" required>
+    <option value="">-- Chọn role --</option>
+    <option value="Quan sát">Quan sát</option>
+    <option value="Gài mồi">Gài mồi</option>
+    <option value="Phản chiếu">Phản chiếu</option>
+    <option value="Dẫn dụ">Dẫn dụ</option>
+    <option value="Kết liễu">Kết liễu</option>
+    <option value="Ẩn thân">Ẩn thân</option>
+  </select><br>
+
+  <input type="text" id="core" placeholder="Năng lực lõi"><br>
+
+  <label>Clusters:</label>
+  <select id="skillClusterSelect" multiple size="5"></select><br>
+
+  <button type="submit">➕ Thêm</button>
+</form>
+<hr>
+
     <button onclick="openSkillForm()">+ Thêm kỹ năng</button>
 
     <!-- Bộ lọc kỹ năng theo trụ K -->
