@@ -143,7 +143,8 @@ function renderChart(canvasId, type, countMap, color) {
       plugins: {
         legend: { display: false }
       },
-      indexAxis: type === "barY" ? "y" : undefined,
+      indexAxis: type === "bar" ? "y" : undefined,
+
       scales: {
         y: { beginAtZero: true }
       }
@@ -156,7 +157,7 @@ function renderAllCharts() {
     Object.keys(countBy("persona")).map(() => `hsl(${Math.random() * 360}, 70%, 70%)`)
   );
   renderChart("phaseChart", "bar", countBy("phase"), "#88C34A");
-  renderChart("roleChart", "barY", countBy("role"), "#FF9800");
+  renderChart("roleChart", "bar", countBy("role"), "#FF9800");
   renderChart("coreChart", "pie", countBy("core"),
     Object.keys(countBy("core")).map(() => `hsl(${Math.random() * 360}, 60%, 70%)`)
   );
