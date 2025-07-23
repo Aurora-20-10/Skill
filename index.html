@@ -13,11 +13,10 @@
 
   <!-- MODULE: SKILL MANAGER -->
   <section>
-    <h2>📘 Kỹ Năng Chiến Lược</h2>
+    <h2>📘 Kỹ Năng Chiến Lược Cá Nhân</h2>
     <button onclick="openSkillForm()">+ Thêm kỹ năng</button>
-    <div id="skillFilters"></div>
     <div id="skillCardsContainer">
-      <!-- Các thẻ kỹ năng (card) sẽ render tại đây bằng JS -->
+      <!-- Các skill-card sẽ render tại đây bằng JS -->
     </div>
   </section>
 
@@ -48,10 +47,63 @@
     </table>
   </section>
 
-  <!-- MODULE: PHÂN TÍCH CÁ NHÂN -->
+  <!-- MODULE: STRATEGIC AUDIT STATION -->
   <section>
-    <h2>🧠 Tự Phân Tầng – Nhận Thức – Lệch Trục</h2>
-    <textarea id="reflectionNotes" placeholder="Ghi nhận cảm giác, nhận thức chiến lược, lệch bản thể nếu có..."></textarea>
+    <h2>🧠 Trạm Audit Chiến Lược – Điều Phối & Lệch Trục</h2>
+    <label for="auditDate">Ngày kiểm tra:</label>
+    <input type="date" id="auditDate" onchange="loadAuditEntry()" />
+
+    <div id="auditEntry">
+      <!-- 1. Sinh học cá nhân -->
+      <div class="audit-block">
+        <h4>1. Sinh khí hiện tại</h4>
+        <select id="bioStatus">
+          <option value="">-- Trạng thái sống hiện tại --</option>
+          <option>Ổn định</option>
+          <option>Mỏi / Cạn</option>
+          <option>Vỡ mạch / Lệch nhịp</option>
+        </select>
+        <textarea id="bioNote" placeholder="Tỉnh – mỏi – áp lực – dễ nổi cáu – khó tập trung..."></textarea>
+      </div>
+
+      <!-- 2. Bản thể -->
+      <div class="audit-block">
+        <h4>2. Bản thể vận hành</h4>
+        <label>Persona chính:</label>
+        <select id="personaSelect">
+          <option value="T-04">T-04 (Phản chiếu mềm)</option>
+          <option value="T-05">T-05 (Điều phối logic)</option>
+          <option value="T-06">T-06 (Đánh chặn chiến lược)</option>
+        </select>
+        <label>Persona phụ ảnh hưởng:</label>
+        <input type="text" id="personaShadow" placeholder="Có bị ai kéo lệch? Ai ảnh hưởng?" />
+      </div>
+
+      <!-- 3. Phản xạ kỹ năng -->
+      <div class="audit-block">
+        <h4>3. Hành vi chiến lược</h4>
+        <textarea id="skillUsed" placeholder="Dùng kỹ năng gì – trong tình huống gì – kết quả ra sao? Có đúng phản xạ bản thể không?"></textarea>
+      </div>
+
+      <!-- 4. Cảnh báo lệch -->
+      <div class="audit-block">
+        <h4>4. Cảnh báo chiến lược</h4>
+        <ul>
+          <li>❓ Dùng kỹ năng không thuộc persona chính?</li>
+          <li>❓ Dùng skill hao năng lượng sai nhịp?</li>
+          <li>❓ Phase chiến lược hôm nay có khớp không?</li>
+        </ul>
+        <textarea id="strategyNote" placeholder="Tổng kết lệch. Đề xuất reset bản thể, im, chuyển mode?"></textarea>
+      </div>
+
+      <!-- 5. Hướng đi -->
+      <div class="audit-block">
+        <h4>5. Chỉ đạo chiến lược cho bản thân</h4>
+        <textarea id="nextAction" placeholder="Ngày mai cần giữ gì? Cắt gì? Kích hoạt bản thể nào?"></textarea>
+      </div>
+
+      <button onclick="saveAuditEntry()">💾 Lưu ghi nhận</button>
+    </div>
   </section>
 
   <!-- POPUP FORM -->
