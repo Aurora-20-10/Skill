@@ -259,6 +259,7 @@ function populateClusterSelect() {
 // === KHỞI TẠO ===
 document.addEventListener("DOMContentLoaded", () => {
   renderSkills();
+  buildClusterDashboard();
   populateClusterSelect();
   populateClusterFilter();
 });
