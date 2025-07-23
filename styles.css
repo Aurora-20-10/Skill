@@ -140,3 +140,11 @@ table th {
 .hidden {
   display: none;
 }
+
+.chart-warning {
+  font-weight: bold;
+  padding: 8px;
+  border-left: 4px solid #faad14;
+  background: #fffbe6;
+  margin-bottom: 20px;
+}
