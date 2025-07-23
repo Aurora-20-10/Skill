@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Quản Lý Kỹ Năng Cá Nhân</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Quản Lý Kỹ Năng Cá Nhân</h1>
+
+  <section>
+    <h2>📘 Bảng Kỹ Năng</h2>
+    <table id="skillTable">
+      <thead>
+        <tr><th>Kỹ năng</th><th>Phân loại</th><th>Cấp độ</th><th>Ghi chú</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <button onclick="addSkill()">+ Thêm kỹ năng</button>
+  </section>
+
+  <section>
+    <h2>🎯 Tình Huống Áp Dụng</h2>
+    <table id="useCases">
+      <thead>
+        <tr><th>Ngày</th><th>Tình huống</th><th>Kỹ năng</th><th>Điểm hiệu quả</th><th>Ghi chú</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <button onclick="addUseCase()">+ Thêm tình huống</button>
+  </section>
+
+  <section>
+    <h2>📊 Tiến Độ Kỹ Năng</h2>
+    <div id="progressContainer"></div>
+  </section>
+
+  <section>
+    <h2>🧾 Ghi chú phân tích</h2>
+    <textarea id="reflectionNotes" placeholder="Tự nhận xét sau 1 tuần / tháng..."></textarea>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
