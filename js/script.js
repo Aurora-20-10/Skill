@@ -123,7 +123,9 @@ function buildClusterDashboard() {
 
 // ---------- 5. CHART HELPERS ----------------------------------------
 function countBy(field){const m={};skillData.forEach(s=>{const k=s[field]||"Chưa xđ";m[k]=(m[k]||0)+1});return m;}
-function renderChart(canvasId,type,countMap,color){const ctx=document.getElementById(canvasId).getContext("2d");if(!ctx)return;const old=window[canvasId];if(old)old.destroy();window[canvasId]=new Chart(ctx,{type,data:{labels:Object.keys(countMap),datasets:[{data:Object.values(countMap),backgroundColor:color}]},options:{plugins:{legend:{display:false}},indexAxis:type==="barY"?"y":undefined,scales:{y:{beginAtZero:true}}}});}
+function renderChart(canvasId,type,countMap,color){const ctx=document.getElementById(canvasId).getContext("2d");if(!ctx)return;const old=window[canvasId];if (old && typeof old.destroy === "function") {
+  old.destroy();
+};window[canvasId]=new Chart(ctx,{type,data:{labels:Object.keys(countMap),datasets:[{data:Object.values(countMap),backgroundColor:color}]},options:{plugins:{legend:{display:false}},indexAxis:type==="barY"?"y":undefined,scales:{y:{beginAtZero:true}}}});}
 function renderAllCharts(){
   renderChart("personaChart","doughnut", countBy("persona"),  Object.keys(countBy("persona")).map(()=>`hsl(${Math.random()*360},70%,70%)`));
   renderChart("phaseChart",   "bar",    countBy("phase"),    "#8BC34A");
