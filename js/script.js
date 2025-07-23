@@ -91,8 +91,8 @@ function buildClusterDashboard() {
   skillData.forEach(s => (s.skillCluster||[]).forEach(k => count[k]++));
 
   const ctx = document.getElementById("clusterChart").getContext("2d");
-if (window.clusterChart instanceof Chart) {
-  window.clusterChart.destroy();
+if (window.clusterChart && typeof window.clusterChart.destroy === "function") {
+    window.clusterChart.destroy();
 }
   window.clusterChart = new Chart(ctx,{type:"bar",data:{labels:Object.keys(K_MAP),datasets:[{data:Object.values(count),backgroundColor:"#4b91e2"}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}});
 
