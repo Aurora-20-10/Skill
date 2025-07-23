@@ -127,10 +127,10 @@ function renderChart(canvasId,type,countMap,color){const ctx=document.getElement
   old.destroy();
 };window[canvasId]=new Chart(ctx,{type,data:{labels:Object.keys(countMap),datasets:[{data:Object.values(countMap),backgroundColor:color}]},options:{plugins:{legend:{display:false}},indexAxis:type==="barY"?"y":undefined,scales:{y:{beginAtZero:true}}}});}
 function renderAllCharts(){
-  renderChart("personaChart","doughnut", countBy("persona"),  Object.keys(countBy("persona")).map(()=>`hsl(${Math.random()*360},70%,70%)`));
-  renderChart("phaseChart",   "bar",    countBy("phase"),    "#8BC34A");
-  renderChart("roleChart",    "barY",   countBy("role"),     "#FF9800");
-  renderChart("coreChart",    "pie",    countBy("core"),     Object.keys(countBy("core")).map(()=>`hsl(${Math.random()*360},60%,70%)`));
+ renderChart("personaChart", "doughnut", countBy("persona"), Object.keys(countBy("persona")).map(() => hsl(Math.random() * 360, 70%, 70%)));
+ renderChart("phaseChart", "bar", countBy("phase"), "#88C34A");
+ renderChart("roleChart", "bar", countBy("role"), "#FF9800");
+ renderChart("coreChart", "pie", countBy("core"), Object.keys(countBy("core")).map(() => hsl(Math.random() * 360, 60%, 70%)));
 }
 
 // ---------- 6. EXPORT CSV -------------------------------------------
