@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>Quản Lý Kỹ Năng Cá Nhân</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <title>Skill Tracker | Aurora System</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <h1>Quản Lý Kỹ Năng Cá Nhân</h1>
+  <h1>🌐 Quản Lý Kỹ Năng Cá Nhân</h1>
 
+  <!-- BẢNG KỸ NĂNG -->
   <section>
     <h2>📘 Bảng Kỹ Năng</h2>
     <table id="skillTable">
       <thead>
         <tr>
-          <th>Kỹ năng</th>
-          <th>Phân loại</th>
-          <th>Loại kỹ năng</th>
-          <th>Cấp độ</th>
-          <th>Ghi chú</th>
+          <th>Tên kỹ năng</th>
+          <th>Nhóm kỹ năng</th>
+          <th>Mức độ</th>
+          <th>Mô tả</th>
+          <th>Tình huống áp dụng</th>
+          <th>Ghi chú chiến lược</th>
+          <th>Ngày bắt đầu</th>
+          <th>Tiến độ (%)</th>
+          <th>Ghi chú cá nhân</th>
         </tr>
       </thead>
       <tbody></tbody>
@@ -25,15 +30,16 @@
     <button onclick="addSkill()">+ Thêm kỹ năng</button>
   </section>
 
+  <!-- TÌNH HUỐNG ÁP DỤNG -->
   <section>
-    <h2>🎯 Tình Huống Áp Dụng</h2>
+    <h2>🎯 Log Tình Huống</h2>
     <table id="useCases">
       <thead>
         <tr>
           <th>Ngày</th>
           <th>Tình huống</th>
-          <th>Kỹ năng</th>
-          <th>Điểm hiệu quả</th>
+          <th>Kỹ năng liên quan</th>
+          <th>Hiệu quả (1–10)</th>
           <th>Ghi chú</th>
         </tr>
       </thead>
@@ -42,14 +48,18 @@
     <button onclick="addUseCase()">+ Thêm tình huống</button>
   </section>
 
+  <!-- DASHBOARD -->
   <section>
-    <h2>📊 Tiến Độ Kỹ Năng</h2>
-    <div id="progressContainer"></div>
+    <h2>📊 Dashboard Tiến Độ</h2>
+    <div id="progressContainer">
+      <p>Biểu đồ tiến độ kỹ năng sẽ hiển thị ở đây (vẽ sau).</p>
+    </div>
   </section>
 
+  <!-- GHI CHÚ PHÂN TÍCH -->
   <section>
     <h2>🧾 Ghi chú phân tích</h2>
-    <textarea id="reflectionNotes" placeholder="Tự nhận xét sau 1 tuần / tháng..."></textarea>
+    <textarea id="reflectionNotes" placeholder="Tổng kết cá nhân theo tuần / tháng..."></textarea>
   </section>
 
   <script src="script.js"></script>
