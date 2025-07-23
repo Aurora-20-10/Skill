@@ -311,3 +311,36 @@ function buildClusterDashboard() {
 
   document.getElementById("clusterGapReport").innerHTML = report;
 }
+
+function exportSkillsToCSV() {
+  if (!skillData.length) return alert("Chưa có dữ liệu kỹ năng.");
+
+  const headers = [
+    "Tên kỹ năng", "Loại", "Level", "Tiến độ", "Persona", "Phase", "Core",
+    "Đối tượng", "Trường hệ", "Vận mệnh", "Chiến trường", "Vai trò", "Kích hoạt",
+    "Năng lượng", "Nhịp luyện", "Mô tả", "Ghi chú chiến lược", "Ghi chú cá nhân", "Trụ K"
+  ];
+
+  const rows = skillData.map(skill => [
+    skill.name, skill.type, skill.level, skill.progress,
+    skill.persona, skill.strategicPhase, skill.coreAbility,
+    skill.targetEntity, skill.affectedSystem, skill.linkedGoal,
+    skill.context, skill.weaponRole, skill.activationMode,
+    skill.energyImpact, skill.expectedRhythm,
+    skill.description, skill.strategyNote, skill.personalNote,
+    (skill.skillCluster || []).join("; ")
+  ]);
+
+  const csvContent = [headers, ...rows]
+    .map(row => row.map(val => `"${(val || "").toString().replace(/"/g, '""')}"`).join(","))
+    .join("\n");
+
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `skill_data_${new Date().toISOString().slice(0,10)}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
