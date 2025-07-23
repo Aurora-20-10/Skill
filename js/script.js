@@ -127,6 +127,7 @@ function populateClusterSelect() {
 // === KHỞI TẠO ===
 document.addEventListener("DOMContentLoaded", () => {
   renderSkills();
+  renderPersonaChart();
   populateClusterSelect();
   populateClusterFilter();
 });
