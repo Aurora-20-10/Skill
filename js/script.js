@@ -344,3 +344,36 @@ function exportSkillsToCSV() {
   a.click();
   document.body.removeChild(a);
 }
+function renderPersonaChart() {
+  const ctx = document.getElementById("personaChart").getContext("2d");
+  const counts = {};
+
+  skillData.forEach(skill => {
+    const key = skill.persona || "Không xác định";
+    counts[key] = (counts[key] || 0) + 1;
+  });
+
+  const labels = Object.keys(counts);
+  const data = Object.values(counts);
+
+  if (window.personaChart) window.personaChart.destroy(); // reset nếu đã có chart
+  window.personaChart = new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels: labels,
+      datasets: [{
+        label: "Số lượng kỹ năng",
+        data: data,
+        backgroundColor: labels.map(() => `hsl(${Math.random()*360}, 70%, 70%)`)
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'right',
+        }
+      }
+    }
+  });
+}
