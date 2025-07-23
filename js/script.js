@@ -2,8 +2,7 @@
 
 import K_MAP from './KMapping.js';
 
-Tôi đã có sẵn 24 kỹ năng chiến lược (K1–K24) chia theo 4 trục logic: phase, role, core, và skillCluster.
-Mỗi kỹ năng là một object như sau:
+// === DỮ LIỆU CƠ BẢN ===
 const skillData = [
   { name: "Chiến lược ngôn ngữ (EN)", phase: "Tự lực", role: "Dẫn dụ", core: "Thao túng ngôn từ để chiếm quyền lực giao tiếp chiến lược", skillCluster: ["K1"] },
   { name: "Thông dịch & quan hệ TQ", phase: "Gây ảnh hưởng", role: "Gài mồi", core: "Cài thông tin chính trị – thương mại qua ngôn ngữ mềm", skillCluster: ["K2"] },
@@ -30,21 +29,10 @@ const skillData = [
   { name: "Điều phối cảm xúc bằng âm thanh", phase: "Điều phối", role: "Phản chiếu", core: "Chuyển hóa cảm xúc và luân xa thành vũ khí điều hướng tình huống", skillCluster: ["K23"] },
   { name: "Chiến lược định hình thế kỷ", phase: "Điều phối", role: "Quan sát", core: "Nhận diện vận động thời đại – can thiệp đúng chu kỳ chuyển hóa", skillCluster: ["K24"] }
 ];
-  name: "Tên kỹ năng",
-  phase: "Trục phát triển (Tự lực / Gây ảnh hưởng / Điều phối)",
-  role: "Chiến thuật (Dẫn dụ / Gài mồi / Quan sát / Phản chiếu / Ẩn thân / Kết liễu)",
-  core: "Mô tả lõi chiến lược của kỹ năng",
-  skillCluster: ["K1", "K2", ...] // để nhóm lại theo các trụ hoặc cụm
-}
-Tôi cần sử dụng mảng skillData gồm 24 object này để:
 
-hiển thị từng kỹ năng trong giao diện web,
+let auditData = JSON.parse(localStorage.getItem("auditData")) || {};
 
-lọc, phân loại theo phase, role, hoặc skillCluster,
-
-hỗ trợ đánh giá năng lực cá nhân theo nhóm kỹ năng đang có/đang thiếu.
-
-Đây là đoạn skillData đã dựng sẵn, chỉ cần tích hợp vào web:
+// ... (các hàm render, delete, audit, v.v. không thay đổi) ...
 
 
 let auditData = JSON.parse(localStorage.getItem("auditData")) || {};
