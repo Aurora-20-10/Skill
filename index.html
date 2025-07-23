@@ -1,84 +1,56 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <title>Skill Tracker | Trạm Phản Xạ Chiến Lược</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <title>Quản Lý Kỹ Năng Cá Nhân</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>🌐 Quản Lý Kỹ Năng Cá Nhân – Chiến Lược & Năng Lượng</h1>
+  <h1>Quản Lý Kỹ Năng Cá Nhân</h1>
 
-  <!-- BẢNG KỸ NĂNG -->
   <section>
     <h2>📘 Bảng Kỹ Năng</h2>
     <table id="skillTable">
       <thead>
         <tr>
-          <th>Tên kỹ năng</th>
-          <th>Nhóm kỹ năng</th>
-          <th>Mức độ hiện tại</th>
-          <th>Mức độ kỳ vọng</th>
-          <th>Trọng số chiến lược</th>
-          <th>Tần suất luyện tập</th>
-          <th>Mô tả</th>
-          <th>Tình huống áp dụng</th>
-          <th>Ghi chú chiến lược</th>
-          <th>Ngày bắt đầu</th>
-          <th>Tiến độ (%)</th>
-          <th>Gắn với mục tiêu</th>
-          <th>Năng lượng tạo ra</th>
-          <th>Sinh lực cần</th>
-          <th>Thời điểm tối ưu</th>
-          <th>Cần hồi phục?</th>
-          <th>Bản thể</th>
-          <th>Chiến trường</th>
-          <th>Combo phản xạ</th>
-          <th>Biến thể ngữ cảnh</th>
-          <th>Ghi chú cá nhân</th>
+          <th>Kỹ năng</th>
+          <th>Phân loại</th>
+          <th>Loại kỹ năng</th>
+          <th>Cấp độ</th>
+          <th>Ghi chú</th>
         </tr>
       </thead>
       <tbody></tbody>
     </table>
-    <button onclick="openSkillForm()">+ Thêm kỹ năng</button>
+    <button onclick="addSkill()">+ Thêm kỹ năng</button>
   </section>
 
-  <!-- TÌNH HUỐNG THỰC CHIẾN -->
   <section>
-    <h2>🎯 Lịch Sử Tình Huống Thực Chiến</h2>
+    <h2>🎯 Tình Huống Áp Dụng</h2>
     <table id="useCases">
       <thead>
         <tr>
           <th>Ngày</th>
           <th>Tình huống</th>
-          <th>Kỹ năng sử dụng</th>
-          <th>Hiệu quả (1–10)</th>
-          <th>Phản xạ đã dùng</th>
-          <th>Kết quả / Ghi chú</th>
+          <th>Kỹ năng</th>
+          <th>Điểm hiệu quả</th>
+          <th>Ghi chú</th>
         </tr>
       </thead>
       <tbody></tbody>
     </table>
-    <button onclick="addUseCase()">+ Ghi tình huống</button>
+    <button onclick="addUseCase()">+ Thêm tình huống</button>
   </section>
 
-  <!-- DASHBOARD -->
   <section>
-    <h2>📊 Dashboard Phản Xạ & Năng Lượng</h2>
-    <div id="progressContainer">
-      <p>(Biểu đồ năng lượng – gap – trọng số – combo sẽ hiển thị tại đây...)</p>
-    </div>
+    <h2>📊 Tiến Độ Kỹ Năng</h2>
+    <div id="progressContainer"></div>
   </section>
 
-  <!-- GHI CHÚ PHÂN TÍCH -->
   <section>
-    <h2>🧾 Ghi chú phân tích cá nhân</h2>
-    <textarea id="reflectionNotes" placeholder="Tổng kết tuần / tháng... Ghi lại cảm giác – phát hiện – lệch hướng..."></textarea>
+    <h2>🧾 Ghi chú phân tích</h2>
+    <textarea id="reflectionNotes" placeholder="Tự nhận xét sau 1 tuần / tháng..."></textarea>
   </section>
-
-  <!-- FORM THÊM KỸ NĂNG (popup – sẽ tạo sau bằng JS) -->
-  <div id="skillFormPopup" class="hidden">
-    <!-- Sẽ render bằng JavaScript -->
-  </div>
 
   <script src="script.js"></script>
 </body>
