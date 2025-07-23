@@ -18,7 +18,7 @@
     <button onclick="openSkillForm()">+ Thêm kỹ năng</button>
 
     <!-- Bộ lọc kỹ năng theo trụ K -->
-    <div class="filter-section">
+    kỹ năng
       <label for="clusterFilter">Lọc theo trụ kỹ năng:</label>
       <select id="clusterFilter">
         <option value="">-- Tất cả --</option>
@@ -28,6 +28,14 @@
     <div class="export-tools" style="text-align: right; margin-bottom: 10px;">
       <button onclick="exportSkillsToCSV()">📤 Xuất CSV</button>
     </div>
+
+    <div class="filter-section">
+  <select id="filterPhase"><option value="">🔄 Phase</option></select>
+  <select id="filterRole"><option value="">🔄 Role</option></select>
+  <select id="filterCore"><option value="">🔄 Core</option></select>
+  <select id="filterCluster"><option value="">🔄 Cluster</option></select>
+  <button onclick="clearAllFilters()">❌ Xóa lọc</button>
+</div>
 
     <div id="skillCardsContainer"></div>
 
