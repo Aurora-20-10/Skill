@@ -13,58 +13,11 @@
 
   <!-- MODULE: SKILL MANAGER -->
   <section>
-    <h2>📘 Kỹ Năng Chiến Lược Cá Nhân</h2>
+    <h2>📘 Kỹ Năng Chiến Lược</h2>
     <button onclick="openSkillForm()">+ Thêm kỹ năng</button>
+    <div id="skillFilters"></div>
     <div id="skillCardsContainer">
-
-      <!-- MẪU SKILL CARD -->
-      <div class="skill-card">
-        <h3>🛠️ Phân tích logic</h3>
-
-        <div class="skill-section">
-          <strong>Loại:</strong> Hard |
-          <strong>Level:</strong> 3/5 |
-          <strong>Tiến độ:</strong> 60%
-        </div>
-
-        <div class="skill-section">
-          <strong>Persona:</strong> T-04 |
-          <strong>Chiến lược:</strong> Tự lực |
-          <strong>Khả năng lõi:</strong> Phân tích vi mô
-        </div>
-
-        <div class="skill-section">
-          <strong>Mục tiêu gắn:</strong> Tăng ảnh hưởng tầng lý trí |
-          <strong>Đối tượng:</strong> Crush / Leader |
-          <strong>Trường hệ:</strong> Nhận thức
-        </div>
-
-        <div class="skill-section">
-          <strong>Chiến trường:</strong> Đàm phán lạnh |
-          <strong>Vai trò:</strong> Gài mồi / Phản chiếu |
-          <strong>Chế độ kích hoạt:</strong> Khi bị công kích
-        </div>
-
-        <div class="skill-section">
-          <strong>Năng lượng:</strong> Rút nội lực |
-          <strong>Nhịp luyện:</strong> 2 lần/tuần |
-          <strong>Thời điểm tối ưu:</strong> Đêm – khi tĩnh
-        </div>
-
-        <details class="skill-details">
-          <summary>📂 Chi tiết thêm</summary>
-          <p><strong>Mô tả:</strong> Dùng để giải mã đối tượng qua phản ứng nhỏ.</p>
-          <p><strong>Ghi chú chiến lược:</strong> Luyện quan sát ánh mắt, phản ứng.</p>
-          <p><strong>Ghi chú cá nhân:</strong> Dùng xong thường kiệt sức nhưng dẫn hướng cao.</p>
-        </details>
-
-        <div class="skill-actions">
-          <button onclick="editSkill('...')">✏️ Sửa</button>
-          <button onclick="deleteSkill('...')">🗑 Xoá</button>
-        </div>
-      </div>
-      <!-- Kết thúc mẫu -->
-
+      <!-- Các thẻ kỹ năng (card) sẽ render tại đây bằng JS -->
     </div>
   </section>
 
