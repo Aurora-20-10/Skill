@@ -127,8 +127,11 @@ function populateClusterSelect() {
 // === KHỞI TẠO ===
 document.addEventListener("DOMContentLoaded", () => {
   renderSkills();
-  renderPersonaChart();         // ✅ Biểu đồ Persona
-  buildClusterDashboard();      // ✅ Biểu đồ Trụ chiến lược
+  renderPersonaChart();
+  buildClusterDashboard();
+  renderPhaseChart();       // ✅ THÊM DÒNG NÀY
+  renderRoleChart();        // ✅ THÊM DÒNG NÀY
+  renderCoreChart();        // ✅ THÊM DÒNG NÀY
   populateClusterSelect();
   populateClusterFilter();
 });
@@ -261,8 +264,11 @@ function populateClusterSelect() {
 // === KHỞI TẠO ===
 document.addEventListener("DOMContentLoaded", () => {
   renderSkills();
-  renderPersonaChart();         // ✅ Biểu đồ Persona
-  buildClusterDashboard();      // ✅ Biểu đồ Trụ chiến lược
+  renderPersonaChart();
+  buildClusterDashboard();
+  renderPhaseChart();       // ✅ THÊM DÒNG NÀY
+  renderRoleChart();        // ✅ THÊM DÒNG NÀY
+  renderCoreChart();        // ✅ THÊM DÒNG NÀY
   populateClusterSelect();
   populateClusterFilter();
 });
@@ -376,6 +382,92 @@ function renderPersonaChart() {
         legend: {
           position: 'right',
         }
+      }
+    }
+  });
+}
+
+function renderPhaseChart() {
+  const ctx = document.getElementById("phaseChart").getContext("2d");
+  const counts = {};
+
+  skillData.forEach(skill => {
+    const key = skill.strategicPhase || "Không xác định";
+    counts[key] = (counts[key] || 0) + 1;
+  });
+
+  if (window.phaseChart) window.phaseChart.destroy();
+  window.phaseChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: Object.keys(counts),
+      datasets: [{
+        label: "Số lượng kỹ năng",
+        data: Object.values(counts),
+        backgroundColor: "#8BC34A"
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+}
+
+function renderRoleChart() {
+  const ctx = document.getElementById("roleChart").getContext("2d");
+  const counts = {};
+
+  skillData.forEach(skill => {
+    const key = skill.weaponRole || "Không xác định";
+    counts[key] = (counts[key] || 0) + 1;
+  });
+
+  if (window.roleChart) window.roleChart.destroy();
+  window.roleChart = new Chart(ctx, {
+    type: "horizontalBar", // nếu Chart.js 2.x
+    data: {
+      labels: Object.keys(counts),
+      datasets: [{
+        label: "Số lượng kỹ năng",
+        data: Object.values(counts),
+        backgroundColor: "#FF9800"
+      }]
+    },
+    options: {
+      indexAxis: 'y', // nếu Chart.js 3.x
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: { x: { beginAtZero: true } }
+    }
+  });
+}
+
+function renderCoreChart() {
+  const ctx = document.getElementById("coreChart").getContext("2d");
+  const counts = {};
+
+  skillData.forEach(skill => {
+    const key = skill.coreAbility || "Không xác định";
+    counts[key] = (counts[key] || 0) + 1;
+  });
+
+  if (window.coreChart) window.coreChart.destroy();
+  window.coreChart = new Chart(ctx, {
+    type: "pie",
+    data: {
+      labels: Object.keys(counts),
+      datasets: [{
+        label: "Số lượng kỹ năng",
+        data: Object.values(counts),
+        backgroundColor: Object.keys(counts).map(() => `hsl(${Math.random()*360}, 60%, 70%)`)
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom' }
       }
     }
   });
