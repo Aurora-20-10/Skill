@@ -148,3 +148,74 @@ table th {
   background: #fffbe6;
   margin-bottom: 20px;
 }
+
+/* === FORM GRID SẮP XẾP GỌN GÀNG === */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+/* === INPUT, SELECT, TEXTAREA === */
+input[type="text"],
+select,
+textarea {
+  font-size: 13px;
+  padding: 6px 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+  background: #fff;
+  color: #222;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* === BUTTON CHUNG NHẤT === */
+button {
+  padding: 8px 14px;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: background 0.2s ease-in-out;
+}
+
+/* === CĂN CHỈNH BẢNG CHỌN FILE === */
+input[type="file"] {
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+/* === FIX CHIỀU CAO & MARGIN CHO CÁC FORM === */
+.audit-block,
+.skill-form {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.skill-form textarea {
+  min-height: 80px;
+}
+
+/* === DROPDOWN CÓ KHOẢNG CÁCH === */
+select {
+  margin-top: 4px;
+}
+
+/* === RESPONSIVE (TÙY CHỌN MỞ RỘNG SAU) === */
+/* @media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+} */
