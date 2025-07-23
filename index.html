@@ -18,34 +18,46 @@
 
 <h3>➕ Thêm kỹ năng mới</h3>
 <form id="addSkillForm">
-  <input type="text" id="name" placeholder="Tên kỹ năng" required><br>
-
-  <label>Phase:</label>
-  <select id="phase" required>
-    <option value="">-- Chọn phase --</option>
-    <option value="Tự lực">Tự lực</option>
-    <option value="Gây ảnh hưởng">Gây ảnh hưởng</option>
-    <option value="Điều phối">Điều phối</option>
-  </select><br>
-
-  <label>Role:</label>
-  <select id="role" required>
-    <option value="">-- Chọn role --</option>
-    <option value="Quan sát">Quan sát</option>
-    <option value="Gài mồi">Gài mồi</option>
-    <option value="Phản chiếu">Phản chiếu</option>
-    <option value="Dẫn dụ">Dẫn dụ</option>
-    <option value="Kết liễu">Kết liễu</option>
-    <option value="Ẩn thân">Ẩn thân</option>
-  </select><br>
-
-  <input type="text" id="core" placeholder="Năng lực lõi"><br>
-
-  <label>Clusters:</label>
-  <select id="skillClusterSelect" multiple size="5"></select><br>
-
-  <button type="submit">➕ Thêm</button>
+  <div class="form-grid">
+    <div>
+      <label for="name">Tên kỹ năng</label>
+      <input type="text" id="name" required />
+    </div>
+    <div>
+      <label for="phase">Phase</label>
+      <select id="phase" required>
+        <option value="">-- Chọn phase --</option>
+        <option value="Tự lực">Tự lực</option>
+        <option value="Gây ảnh hưởng">Gây ảnh hưởng</option>
+        <option value="Điều phối">Điều phối</option>
+      </select>
+    </div>
+    <div>
+      <label for="role">Role</label>
+      <select id="role" required>
+        <option value="">-- Chọn role --</option>
+        <option value="Quan sát">Quan sát</option>
+        <option value="Gài mồi">Gài mồi</option>
+        <option value="Phản chiếu">Phản chiếu</option>
+        <option value="Dẫn dụ">Dẫn dụ</option>
+        <option value="Kết liễu">Kết liễu</option>
+        <option value="Ẩn thân">Ẩn thân</option>
+      </select>
+    </div>
+    <div>
+      <label for="core">Năng lực lõi</label>
+      <input type="text" id="core" />
+    </div>
+    <div class="full-width">
+      <label for="skillClusterSelect">Clusters</label>
+      <select id="skillClusterSelect" multiple size="5"></select>
+    </div>
+    <div class="full-width">
+      <button type="submit">➕ Thêm</button>
+    </div>
+  </div>
 </form>
+    
 <hr>
 
     <button onclick="openSkillForm()">+ Thêm kỹ năng</button>
