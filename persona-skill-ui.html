@@ -1,0 +1,96 @@
+import React, { useState } from "react";
+import personaData from "./persona_full_data_v2.json";
+import {
+  Tabs,
+  Tab,
+  Card,
+  CardContent,
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  Input,
+  Button,
+  Badge,
+} from "@/components/ui";
+
+export default function PersonaSkillManager() {
+  const personas = personaData.personas || [];
+  const [selectedPersona, setSelectedPersona] = useState(personas[0]);
+  const [tab, setTab] = useState("survival");
+  const [keyword, setKeyword] = useState("");
+
+  const filteredSkills = (persona, phase) => {
+    const block = persona.reflexes[phase];
+    if (!block) return [];
+    return block.skills.filter((skill) =>
+      keyword ? skill.toLowerCase().includes(keyword.toLowerCase()) : true
+    );
+  };
+
+  return (
+    <div className="p-4 max-w-4xl mx-auto">
+      <h1 className="text-2xl font-bold mb-4">🧠 Persona Skill Manager</h1>
+
+      {/* Persona Selector */}
+      <div className="flex gap-4 items-center mb-4">
+        <span className="font-semibold">Persona:</span>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline">{selectedPersona.name}</Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            {personas.map((p) => (
+              <DropdownMenuItem
+                key={p.name}
+                onClick={() => setSelectedPersona(p)}
+              >
+                {p.icon || "🧬"} {p.name}
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+
+      {/* Tabbed Reflex Display */}
+      <Tabs value={tab} onValueChange={setTab} className="mb-4">
+        <Tab value="survival">🧩 Survival</Tab>
+        <Tab value="coordination">🧠 Coordination</Tab>
+        <Tab value="strategic">🧠 Strategic</Tab>
+        <Tab value="tactical">⚔️ Tactical</Tab>
+      </Tabs>
+
+      {/* Trigger & Flow */}
+      <Card className="mb-4">
+        <CardContent>
+          <h2 className="text-lg font-semibold mb-2">Trigger</h2>
+          <p className="mb-3">
+            {selectedPersona.reflexes[tab]?.trigger || "(Không có dữ liệu)"}
+          </p>
+          <h2 className="text-lg font-semibold mb-2">Flow</h2>
+          <ul className="list-disc pl-5">
+            {selectedPersona.reflexes[tab]?.flow?.map((f, idx) => (
+              <li key={idx}>{f}</li>
+            )) || <li>(Không có dữ liệu)</li>}
+          </ul>
+        </CardContent>
+      </Card>
+
+      {/* Skill Search & Display */}
+      <div className="mb-2">
+        <Input
+          placeholder="🔍 Tìm kỹ năng theo keyword..."
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+        />
+      </div>
+      <div className="grid grid-cols-2 gap-2">
+        {filteredSkills(selectedPersona, tab).map((s, idx) => (
+          <Badge key={idx} className="text-sm px-2 py-1">
+            {s}
+          </Badge>
+        ))}
+      </div>
+    </div>
+  );
+}
