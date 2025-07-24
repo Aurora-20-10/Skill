@@ -309,3 +309,27 @@ document.getElementById("personaSelector").addEventListener("change", function (
     container.appendChild(div);
   });
 });
+
+const select = document.getElementById('personaSelector'); // đúng id bạn đang dùng
+
+if (select) {
+  // Render danh sách
+  Object.keys(personaData).forEach(p => {
+    const option = document.createElement('option');
+    option.value = p;
+    option.textContent = p;
+    select.appendChild(option);
+  });
+
+  // Gắn event
+  select.addEventListener('change', () => {
+    const persona = personaData[select.value];
+    if (!persona) return;
+
+    // 👉 Thay vì console.log, render ra UI
+    console.log("Survival:", persona.survival.trigger, persona.survival.flow);
+    console.log("Coordination:", persona.coordination.flow);
+    console.log("Strategic:", persona.strategic.flow);
+  });
+}
+
