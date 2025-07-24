@@ -232,3 +232,20 @@ select {
   padding: 5px;
 }
 
+/* === FLOWCHART CONTAINER === */
+.graph-container {
+  transform: scale(0.8); /* Điều chỉnh tỉ lệ tùy ý (0.6–1.0) */
+  transform-origin: top left;
+  max-width: 100%;
+  overflow: auto;
+  margin-bottom: 30px;
+}
+
+/* Cho phép kéo ngang nếu biểu đồ dài */
+.graph-scroll-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+  padding-bottom: 10px;
+}
+
