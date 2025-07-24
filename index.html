@@ -224,7 +224,32 @@
   </div>
 
   <!-- Dữ liệu persona -->
+<!-- Nhúng dữ liệu trước -->
 <script src="js/data.js"></script>
+
+<!-- Dùng dữ liệu sau -->
+<script>
+  // ✅ Kiểm tra toàn bộ object personaData
+  console.log("🔍 Dữ liệu persona đầy đủ đã load:");
+  console.log(personaData);
+
+  // ✅ Duyệt và in từng persona với tên và nội dung
+  Object.keys(personaData).forEach(key => {
+    console.log(`🎭 Persona: ${key}`);
+    console.log(personaData[key]);
+  
+  // Render dropdown persona selector (nếu cần)
+  const selector = document.getElementById("personaSelector");
+  if (selector && personaData) {
+    selector.innerHTML = '<option value="">— Tất cả —</option>'; // reset
+    Object.keys(personaData).forEach(name => {
+      const option = document.createElement('option');
+      option.value = name;
+      option.textContent = name;
+      selector.appendChild(option);
+    });
+  }
+</script>
 
 <!-- Mapping trụ kỹ năng -->
 <script src="js/KMapping.js"></script>
