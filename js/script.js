@@ -54,9 +54,13 @@ function renderSkills(data = skillData) {
 const badges = (s.skillCluster || []).map(k =>
       `<a href="lessons/${k}.html" class="badge" title="${K_MAP[k]}" target="_blank">${k}</a>`
     ).join(" ");
-    
+
+      const mainLink = (s.skillCluster && s.skillCluster.length > 0)
+      ? `lessons/${s.skillCluster[0]}.html`
+      : null;
+
     card.innerHTML = `
-      <h3>🛠️ ${s.name}</h3>
+      <h3>${mainLink ? `<a href="${mainLink}" target="_blank">🛠️ ${s.name}</a>` : `🛠️ ${s.name}`}</h3>
       <div class="skill-section"><strong>Phase:</strong> ${s.phase} | <strong>Role:</strong> ${s.role} | <strong>Core:</strong> ${s.core}</div>
       <div class="badges">${badges}</div>
       <button class="del" onclick="deleteSkill(${i})">🗑️ Xoá</button>`;
