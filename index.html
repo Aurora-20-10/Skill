@@ -92,7 +92,10 @@
     <!-- ✅ Biểu đồ phân loại theo Persona -->
     <section id="chartSection">
       <h3>📊 Biểu đồ kỹ năng theo Persona</h3>
-      <canvas id="personaChart" height="200"></canvas>
+<div class="chart-wrapper" data-canvas="personaChart">
+        <canvas id="personaChart" height="200"></canvas>
+        <button class="enlarge-btn" onclick="enlargeChart('personaChart')">🔍 Phóng to</button>
+      </div>
 <label for="personaSelector">🎭 Chọn Persona:</label>
 <select id="personaSelector">
   <option value="">— Tất cả —</option>
@@ -112,19 +115,26 @@
     <!-- ✅ Thêm 3 biểu đồ phân tích -->
     <section>
       <h3>📊 🏁 Giai đoạn chiến lược Analysis</h3>
-      <canvas id="phaseChart" height="120"></canvas>
+ <div class="chart-wrapper" data-canvas="phaseChart">
+        <canvas id="phaseChart" height="120"></canvas>
+        <button class="enlarge-btn" onclick="enlargeChart('phaseChart')">🔍 Phóng to</button>
+      </div>
       <div id="phaseWarning" class="chart-warning" style="color: #d48806; margin-top: 10px; display: none;"></div>
     </section>
 
     <section>
       <h3>⚔️ 🎭 Vai trò hành động Analysis</h3>
-      <canvas id="roleChart" height="180"></canvas>
-      <div id="roleWarning" class="chart-warning" style="color: #d48806; margin-top: 10px; display: none;"></div>
+  <div class="chart-wrapper" data-canvas="roleChart">
+        <canvas id="roleChart" height="180"></canvas>
+        <button class="enlarge-btn" onclick="enlargeChart('roleChart')">🔍 Phóng to</button>
+      </div>      <div id="roleWarning" class="chart-warning" style="color: #d48806; margin-top: 10px; display: none;"></div>
     </section>
 
     <section>
-      <h3>🧠 Năng lực lõi Competency Analysis</h3>
-      <canvas id="coreChart" height="120"></canvas>
+      <h3>🧠 Năng lực lõi Competency Analysis</h3>   <div class="chart-wrapper" data-canvas="coreChart">
+        <canvas id="coreChart" height="120"></canvas>
+        <button class="enlarge-btn" onclick="enlargeChart('coreChart')">🔍 Phóng to</button>
+      </div>  <canvas id="coreChart" height="120"></canvas>
       <div id="coreWarning" class="chart-warning" style="color: #d48806; margin-top: 10px; display: none;"></div>
     </section>
   </section>
@@ -132,8 +142,9 @@
   <!-- MODULE: DASHBOARD -->
   <section>
     <h2>📊 Dashboard Phản Xạ</h2>
-    <div id="dashboardContainer">
-      <canvas id="clusterChart" width="800" height="400"></canvas>
+   <div id="dashboardContainer" class="chart-wrapper" data-canvas="clusterChart">
+      <canvas id="clusterChart" height="400"></canvas>
+      <button class="enlarge-btn" onclick="enlargeChart('clusterChart')">🔍 Phóng to</button>
       <div id="clusterGapReport" style="margin-top: 20px;"></div>
     </div>
   </section>
@@ -280,6 +291,7 @@ function clearAllFilters() {
   inputs.forEach(input => input.value = "");
 }
 </script>
+  <div id="chartOverlay" class="chart-overlay hidden"></div>
   <div class="export-tools" style="text-align: right; margin-top: 20px;">
   <button onclick="exportSkillsToCSV()">📤 Xuất CSV</button>
 </div>
