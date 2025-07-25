@@ -51,8 +51,10 @@ function renderSkills(data = skillData) {
     const card = document.createElement("div");
     card.className = "skill-card";
 
-    const badges = (s.skillCluster || []).map(k => `<span class="badge" title="${K_MAP[k]}">${k}</span>`).join(" ");
-
+const badges = (s.skillCluster || []).map(k =>
+      `<a href="lessons/${k}.html" class="badge" title="${K_MAP[k]}" target="_blank">${k}</a>`
+    ).join(" ");
+    
     card.innerHTML = `
       <h3>🛠️ ${s.name}</h3>
       <div class="skill-section"><strong>Phase:</strong> ${s.phase} | <strong>Role:</strong> ${s.role} | <strong>Core:</strong> ${s.core}</div>
@@ -302,7 +304,7 @@ document.getElementById("personaSelector").addEventListener("change", function (
 
   if (!selectedPersona) return;
 
-  const matchedSkills = skills.filter(skill =>
+  const matchedSkills = skillData.filter(skill =>
     skill.personaMain === selectedPersona || skill.personaSupport === selectedPersona
   );
 
