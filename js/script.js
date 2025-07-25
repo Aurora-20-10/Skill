@@ -61,7 +61,7 @@ const badges = (s.skillCluster || []).map(k =>
 
     card.innerHTML = `
       <h3>${mainLink ? `<a href="${mainLink}" target="_blank">🛠️ ${s.name}</a>` : `🛠️ ${s.name}`}</h3>
-      <div class="skill-section"><strong>Phase:</strong> ${s.phase} | <strong>Role:</strong> ${s.role} | <strong>Core:</strong> ${s.core}</div>
+      <div class="skill-section"><strong>🏁 Giai đoạn chiến lược:</strong> ${s.phase} | <strong>🎭 Vai trò hành động:</strong> ${s.role} | <strong>🧠 Năng lực lõi:</strong> ${s.core}</div>
       <div class="badges">${badges}</div>
       <button class="del" onclick="deleteSkill(${i})">🗑️ Xoá</button>`;
     box.appendChild(card);
