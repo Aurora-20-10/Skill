@@ -173,6 +173,20 @@ function renderClusterCheckboxes() {
   }
 }
 
+function renderLessonGrid() {
+  const grid = document.getElementById("lessonGrid");
+  if (!grid) return;
+  grid.innerHTML = "";
+  for (const k in K_MAP) {
+    const a = document.createElement("a");
+    a.href = `lessons/${k}.html`;
+    a.target = "_blank";
+    a.className = "lesson-box";
+    a.textContent = `${k} – ${K_MAP[k]}`;
+    grid.appendChild(a);
+  }
+}
+
 function addSkill() {
   const name  = document.getElementById("skillName").value.trim();
   const phase = document.getElementById("phaseSelect").value;
@@ -204,7 +218,8 @@ document.addEventListener("DOMContentLoaded",()=>{
   populateClusterSelect();
   populateClusterFilter();
   populateAdvancedFilters();
-  renderClusterCheckboxes(); 
+  renderClusterCheckboxes();
+  renderLessonGrid();
 });
 
 function populateAdvancedFilters() {
