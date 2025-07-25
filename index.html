@@ -245,7 +245,8 @@
   Object.keys(personaData).forEach(key => {
     console.log(`🎭 Persona: ${key}`);
     console.log(personaData[key]);
-  
+  });
+
   // Render dropdown persona selector (nếu cần)
   const selector = document.getElementById("personaSelector");
   if (selector && personaData) {
@@ -265,9 +266,6 @@
 <!-- Logic giao diện chính -->
 <script type="module" src="js/script.js"></script>
 
-</body>
-</html>
-
 <script>
 function openSkillForm() {
   const form = document.getElementById("skillForm");
@@ -278,7 +276,9 @@ function clearAllFilters() {
   const selects = document.querySelectorAll("select");
   selects.forEach(select => select.selectedIndex = 0);
 
-const inputs = document.querySelectorAll("input[type='text'], textarea");
+ const inputs = document.querySelectorAll("input[type='text'], textarea");
   inputs.forEach(input => input.value = "");
 }
 </script>
+</body>
+</html>
