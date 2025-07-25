@@ -295,7 +295,7 @@ select {
 
 /* === CHART WRAPPERS === */
 .chart-wrapper {
-  max-width: 600px;
+  max-width: 300px;
   margin: 0 auto 20px;
   text-align: center;
 }
