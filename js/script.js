@@ -205,6 +205,19 @@ function renderClusterCheckboxes() {
   }
 }
 
+function renderLessonGrid() {
+  const grid = document.getElementById("lessonGrid");
+  if (!grid) return;
+  grid.innerHTML = "";
+  for (const k in K_MAP) {
+    const link = document.createElement("a");
+    link.href = `lessons/${k}.html`;
+    link.target = "_blank";
+    link.className = "lesson-box";
+    link.textContent = `${k} – ${K_MAP[k]}`;
+    grid.appendChild(link);
+  }
+}
 
 function addSkill() {
   const name  = document.getElementById("name").value.trim();
@@ -238,6 +251,8 @@ document.addEventListener("DOMContentLoaded",()=>{
   populateClusterFilter();
   populateAdvancedFilters();
   renderClusterCheckboxes();
+  renderLessonGrid();
+
 });
 
   const form = document.getElementById("addSkillForm");
