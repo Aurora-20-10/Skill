@@ -3,8 +3,33 @@
 //  ✦ ĐÃ LƯỢC TRÙNG, CHỈ CÒN 1 BỘ CODE DUY NHẤT
 // ==============================================
 
-import K_MAP from "./KMapping.js";
-
+// Mapping mã trụ -> tên đầy đủ
+const K_MAP = {
+  K1: "Tiếng Anh chiến lược",
+  K2: "Tiếng Trung chiến lược",
+  K3: "Kinh tế học thực chiến",
+  K4: "Tài chính – Đầu tư cá nhân",
+  K5: "Luật thực chiến",
+  K6: "Kinh doanh – Thị trường",
+  K7: "Tâm lý học chiến lược",
+  K8: "AI – IT ứng dụng",
+  K9: "Y học – Sinh học – Thân thể",
+  K10: "Triết học – Logic – Phản tư",
+  K11: "Chính trị – Quyền lực – Địa chính trị",
+  K12: "Tâm linh chiến lược – khí – nghiệp",
+  K13: "Sinh tồn – thực chiến nội tại",
+  K14: "Mỹ học – nghệ thuật",
+  K15: "Ngôn từ – giao tiếp – phản xạ chiến lược",
+  K16: "Sản xuất nội dung – thương hiệu cá nhân",
+  K17: "Làm chủ gene – điều phối phản xạ sinh học",
+  K18: "Rewire hành vi – thay máu tiềm thức",
+  K19: "Thiết kế hệ – hệ thống hóa",
+  K20: "Siêu ghi nhớ – Meta-learning",
+  K21: "Phân tích dữ liệu – chiến lược số",
+  K22: "Soft networking – kết nối tầng cao",
+  K23: "Ca hát – điều phối cảm xúc – hơi thở",
+  K24: "Thời đại – địa hình thế kỷ – không lệch vận sống"
+};
 // ---------- 1. DATA --------------------------------------------------
 //   • Nếu localStorage rỗng → nạp bộ mẫu (defaultSkillData)
 //   • Ngược lại dùng data đã lưu
@@ -78,7 +103,8 @@ function deleteSkill(i) {
 
 // ---------- 3. FILTER & SELECT CLUSTER ------------------------------
 function populateClusterSelect() {
-  const sel = document.getElementById("skillCluster"); if (!sel) return;
+const sel = document.getElementById("skillClusterSelect");
+  if (!sel) return;
   for (const k in K_MAP) sel.add(new Option(`${k} – ${K_MAP[k]}`, k));
 }
 function populateClusterFilter() {
@@ -181,12 +207,12 @@ function renderClusterCheckboxes() {
 
 
 function addSkill() {
-  const name  = document.getElementById("skillName").value.trim();
-  const phase = document.getElementById("phaseSelect").value;
-  const role  = document.getElementById("roleSelect").value;
-  const core  = document.getElementById("coreInput").value.trim();
-  const clusterEls = document.querySelectorAll("#clusterCheckboxes input:checked");
-  const clusters = Array.from(clusterEls).map(e => e.value);
+  const name  = document.getElementById("name").value.trim();
+  const phase = document.getElementById("phase").value;
+  const role  = document.getElementById("role").value;
+  const core  = document.getElementById("core").value.trim();
+  const select = document.getElementById("skillClusterSelect");
+  const clusters = Array.from(select.selectedOptions).map(o => o.value);
 
   if (!name || !phase || !role || !core)
     return alert("Điền đầy đủ thông tin.");
@@ -213,6 +239,15 @@ document.addEventListener("DOMContentLoaded",()=>{
   populateAdvancedFilters();
   renderClusterCheckboxes();
 });
+
+  const form = document.getElementById("addSkillForm");
+  if (form) {
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      addSkill();
+      form.reset();
+    });
+  }
 
 function populateAdvancedFilters() {
   const pSel = document.getElementById("filterPhase");
