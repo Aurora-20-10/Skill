@@ -322,6 +322,10 @@ select {
   z-index: 1000;
 }
 
+.chart-overlay.hidden {
+  display: none;
+}
+
 .chart-overlay button {
   position: absolute;
   top: 10px;
