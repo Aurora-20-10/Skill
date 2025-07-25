@@ -295,7 +295,7 @@ select {
 
 /* === CHART WRAPPERS === */
 .chart-wrapper {
-  max-width: 400px; /* giảm kích thước biểu đồ */
+  max-width: 600px; /* giảm kích thước biểu đồ */
   margin: 0 auto 20px;
   text-align: center;
 }
