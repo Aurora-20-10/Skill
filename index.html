@@ -15,6 +15,11 @@
   <!-- MODULE: SKILL MANAGER -->
   <section>
     <h2>📘 Kỹ Năng Chiến Lược Cá Nhân</h2>
+<div class="import-section" style="margin-bottom:10px;">
+  <label for="importCSV">📥 Nhập CSV: </label>
+  <input type="file" id="importCSV" accept=".csv">
+  <button onclick="importCSV()">Nhập CSV</button>
+</div>
 
 <h3>➕ Thêm kỹ năng mới</h3>
 <form id="addSkillForm">
@@ -67,17 +72,6 @@
         <option value="">-- Tất cả --</option>
       </select>
     </div>
-
-    <div class="export-tools" style="text-align: right; margin-bottom: 10px;">
-      <button onclick="exportSkillsToCSV()">📤 Xuất CSV</button>
-    </div>
-
-<hr>
-<div class="import-section">
-  <label for="importCSV">📥 Import CSV: </label>
-  <input type="file" id="importCSV" accept=".csv">
-  <button onclick="importCSV()">Nhập dữ liệu</button>
-</div>
     
     <div class="filter-section">
   <select id="filterPhase"><option value="">🔄 Phase</option></select>
@@ -280,5 +274,8 @@ function clearAllFilters() {
   inputs.forEach(input => input.value = "");
 }
 </script>
+  <div class="export-tools" style="text-align: right; margin-top: 20px;">
+  <button onclick="exportSkillsToCSV()">📤 Xuất CSV</button>
+</div>
 </body>
 </html>
