@@ -29,16 +29,16 @@
       <input type="text" id="name" required />
     </div>
     <div>
-      <label for="phase">Phase</label>
+      <label for="phase">🏁 Giai đoạn chiến lược</label>
       <select id="phase" required>
-        <option value="">-- Chọn phase --</option>
+        <option value="">-- Chọn giai đoạn --</option>
         <option value="Tự lực">Tự lực</option>
         <option value="Gây ảnh hưởng">Gây ảnh hưởng</option>
         <option value="Điều phối">Điều phối</option>
       </select>
     </div>
     <div>
-      <label for="role">Role</label>
+      <label for="role">🎭 Vai trò hành động</label>
       <select id="role" required>
         <option value="">-- Chọn role --</option>
         <option value="Quan sát">Quan sát</option>
@@ -54,7 +54,7 @@
       <input type="text" id="core" />
     </div>
     <div class="full-width">
-      <label for="skillClusterSelect">Clusters</label>
+      <label for="skillClusterSelect">🗂️ Nhóm trụ kỹ năng</label>
       <select id="skillClusterSelect" multiple size="5"></select>
     </div>
     <div class="full-width">
@@ -74,10 +74,10 @@
     </div>
     
     <div class="filter-section">
-  <select id="filterPhase"><option value="">🔄 Phase</option></select>
-  <select id="filterRole"><option value="">🔄 Role</option></select>
-  <select id="filterCore"><option value="">🔄 Core</option></select>
-  <select id="filterCluster"><option value="">🔄 Cluster</option></select>
+  <select id="filterPhase"><option value="">🔄 🏁 Giai đoạn chiến lược</option></select>
+  <select id="filterRole"><option value="">🔄 🎭 Vai trò hành động</option></select>
+  <select id="filterCore"><option value="">🔄 🧠 Năng lực lõi</option></select>
+  <select id="filterCluster"><option value="">🔄 🗂️ Nhóm trụ kỹ năng</option></select>
   <button onclick="clearAllFilters()">❌ Xóa lọc</button>
 </div>
 
@@ -111,19 +111,19 @@
 
     <!-- ✅ Thêm 3 biểu đồ phân tích -->
     <section>
-      <h3>📊 Phase Analysis</h3>
+      <h3>📊 🏁 Giai đoạn chiến lược Analysis</h3>
       <canvas id="phaseChart" height="120"></canvas>
       <div id="phaseWarning" class="chart-warning" style="color: #d48806; margin-top: 10px; display: none;"></div>
     </section>
 
     <section>
-      <h3>⚔️ Role Analysis</h3>
+      <h3>⚔️ 🎭 Vai trò hành động Analysis</h3>
       <canvas id="roleChart" height="180"></canvas>
       <div id="roleWarning" class="chart-warning" style="color: #d48806; margin-top: 10px; display: none;"></div>
     </section>
 
     <section>
-      <h3>🧠 Core Competency Analysis</h3>
+      <h3>🧠 Năng lực lõi Competency Analysis</h3>
       <canvas id="coreChart" height="120"></canvas>
       <div id="coreWarning" class="chart-warning" style="color: #d48806; margin-top: 10px; display: none;"></div>
     </section>
@@ -201,7 +201,7 @@
         <ul>
           <li>❓ Dùng kỹ năng không thuộc persona chính?</li>
           <li>❓ Dùng skill hao năng lượng sai nhịp?</li>
-          <li>❓ Phase chiến lược hôm nay có khớp không?</li>
+          <li>❓ 🏁 Giai đoạn chiến lược hôm nay có khớp không?</li>
         </ul>
         <textarea id="strategyNote" placeholder="Tổng kết lệch. Đề xuất reset bản thể, im, chuyển mode?"></textarea>
       </div>
