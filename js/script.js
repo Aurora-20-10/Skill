@@ -340,3 +340,26 @@ if (select) {
   });
 }
 
+// ----- CHART ENLARGE -------------------------------------------------
+const chartOrigins = {};
+
+function enlargeChart(id) {
+  const canvas = document.getElementById(id);
+  const overlay = document.getElementById('chartOverlay');
+  if (!canvas || !overlay) return;
+
+  if (!chartOrigins[id]) {
+    chartOrigins[id] = canvas.parentElement;
+  }
+
+  overlay.innerHTML = '';
+  const close = document.createElement('button');
+  close.textContent = '✖';
+  close.onclick = () => {
+    overlay.classList.add('hidden');
+    chartOrigins[id].prepend(canvas);
+  };
+  overlay.appendChild(close);
+  overlay.appendChild(canvas);
+  overlay.classList.remove('hidden');
+}
