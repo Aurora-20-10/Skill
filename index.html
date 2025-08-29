@@ -832,6 +832,46 @@ table thead th{
 .af-hide{ display:none !important; }
 </style>
 
+
+<style id="mobile-fix-v1">
+/* ===== MOBILE-FIX v1 (<=480px) ===== */
+@media (max-width: 480px){
+  html, body{ overflow-x:hidden; overscroll-behavior-y:none; }
+  main{ padding: 0 12px !important; }
+  header.appbar .appbar-inner, header .row{ padding:8px 12px !important; }
+  /* Tabs → horizontal scroll */
+  .tabs, [role="tablist"]{ display:flex !important; overflow-x:auto; gap:8px; padding-bottom:6px; scrollbar-width:none; }
+  .tabs::-webkit-scrollbar, [role="tablist"]::-webkit-scrollbar{ display:none; }
+  .tab, [role="tab"]{ flex:0 0 auto; }
+  /* Single-column grid */
+  .grid{ display:grid; grid-template-columns:1fr !important; }
+  .col-12, .col-6, .col-4{ grid-column: 1 / -1 !important; }
+  /* Cards & spacing */
+  .card, .panel, .kpanel, .p1-card, .p2-wrap, .af-card, section.view{
+    padding:12px !important; border-radius:12px !important;
+  }
+  .row{ gap:8px !important; }
+  /* Flexible columns in P2 */
+  .p2-row{ flex-direction:column !important; }
+  .p2-col, .p2-col-2, .p2-col-3{ min-width:0 !important; flex:1 1 100% !important; width:100% !important; }
+  /* Inputs: prevent iOS zoom */
+  input[type="text"], input[type="number"], input[type="search"], input[type="date"],
+  textarea, select, .p2-input, .p2-textarea, .p2-select{ font-size:16px !important; }
+  /* Dialogs & modals */
+  .modal .dialog, .dialog{ width:96vw !important; max-width:96vw !important; padding:12px !important; }
+  /* Charts a bit shorter on phones */
+  .chart-wrap canvas{ height:200px !important; }
+  /* Tables: scroll instead of overflow */
+  table{ display:block; max-width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+}
+/* ===== MOBILE-FIX v2 (<=360px) tighten a bit more ===== */
+@media (max-width: 360px){
+  h1{ font-size:18px !important; }
+  h2{ font-size:16px !important; }
+  .btn, button{ height:36px !important; padding:0 10px !important; }
+}
+</style>
+
 </head>
 <body><a class="skip-link" href="#main">Bỏ qua đến nội dung chính</a>
 <script id="CP_DATA" type="application/json">
@@ -1450,28 +1490,32 @@ table thead th{
 <button class="btn small" id="btnRestore" type="button">🕑 Khôi phục</button>
 <button class="btn small" id="btnFocusToday" type="button">🎯 Focus Hôm nay</button><button class="btn small" id="btnKPIManager" type="button">📈 KPI</button><button class="btn small" id="btnMergeJSON" type="button">⇄ Gộp JSON</button><input accept="application/json" hidden="" id="fileMerge" type="file"/></div>
 </div>
-<div class="row" style="margin-top:.6rem"><div class="field" style="max-width:280px"><label for="personaFilter">Lọc theo Persona</label><select id="personaFilter"><option value="">— Tất cả —</option></select></div>
-<div class="field" style="max-width:280px">
-<label for="phaseFilter">Lọc theo Phase</label>
-<select id="phaseFilter">
-<option value="">— Tất cả —</option>
-<option value="1">1 • Tự lực</option>
-<option value="2">2 • Gây ảnh hưởng</option>
-<option value="3">3 • Điều phối</option>
-      </select>
-</div>
-<div class="field" style="max-width:260px">
-<label for="onlyCompat">Lọc tương thích Persona</label>
-<div class="row" style="align-items:center;gap:.4rem">
-<input id="onlyCompat" type="checkbox"/>
-<span class="muted">Chỉ hiện kỹ năng phù hợp</span>
-</div>
-</div>
-</div>
-<div class="field" style="max-width:340px">
-<label for="searchBox">Tìm kỹ năng</label>
-<input id="searchBox" placeholder="Nhập tên kỹ năng, vai trò, ghi chú..." type="text"/>
-</div>
+        <!--
+          The original template included a Persona filter but it wasn't visible in the 24K file.
+          To restore parity with the Gốc.html version, we restructure this row so that the
+          Persona dropdown, the "Lọc tương thích Persona" checkbox, and the search box
+          live together in the same flex container. This ensures the Persona select is
+          displayed correctly across themes.
+        -->
+        <div class="row" style="margin-top:.6rem">
+          <div class="field" style="max-width:280px">
+            <label for="personaFilter">Lọc theo Persona</label>
+            <select id="personaFilter">
+              <option value="">— Tất cả —</option>
+            </select>
+          </div>
+          <div class="field" style="max-width:260px">
+            <label for="onlyCompat">Lọc tương thích Persona</label>
+            <div class="row" style="align-items:center;gap:.4rem">
+              <input id="onlyCompat" type="checkbox"/>
+              <span class="muted">Chỉ hiện kỹ năng phù hợp</span>
+            </div>
+          </div>
+          <div class="field" style="max-width:340px">
+            <label for="searchBox">Tìm kỹ năng</label>
+            <input id="searchBox" placeholder="Nhập tên kỹ năng, vai trò, ghi chú..." type="text"/>
+          </div>
+        </div>
 </div>
 </div>
 <div class="col-12 grid" id="skillsList"></div>
@@ -1531,7 +1575,7 @@ table thead th{
 <div class="sub">30d: <span id="p1-reflex30">–</span></div>
 </div>
 <div class="p1-card">
-<h4>Energy Trend</h4>
+<h4>Avg Energy (base)</h4>
 <div class="big" id="p1-energy">–</div>
 <div class="sub">Low energy flags: <span id="p1-lowenergy">0</span></div>
 </div>
@@ -6026,7 +6070,7 @@ function cleanNote(txt){
     const personaSel = personaFilter ? personaFilter.value : '';
     const onlyOK = onlyCompat ? !!onlyCompat.checked : false;
     const q = (searchBox.value || "").toLowerCase().trim();
-    const pf = phaseFilter.value;
+    const pf = (typeof phaseFilter!=='undefined' && phaseFilter) ? phaseFilter.value : '';
     const filtered = skills.filter(s => {
       const hit = !q || (s.name?.toLowerCase().includes(q) || s.note?.toLowerCase().includes(q));
       const phaseOk = !pf || String(s.phase) === pf;
@@ -6102,7 +6146,7 @@ col.innerHTML = `
   });
 
   // Filters
-  [phaseFilter, searchBox].forEach(elm => elm.addEventListener("input", debounce(()=>{ renderSkills(); updateDashboard(); }, 220)));
+  [searchBox].forEach(elm => elm.addEventListener("input", debounce(()=>{ renderSkills(); updateDashboard(); }, 220)));
 
   // Add / Export / Import
   btnAddSkill.addEventListener("click", () => {
@@ -7538,7 +7582,7 @@ const ctx2 = null;
     </div>
     <div>
       <div class="smallnote">CP chọn</div>
-      <select id="cpSelect" multiple size="1"></select>
+      <select id="cpSelect" multiple size="6"></select>
     </div>
     <div>
       <div class="smallnote">Đồng hồ</div>
@@ -7672,7 +7716,10 @@ const ctx2 = null;
   (function setupFilters(){
     const root = document.getElementById('skill-content-af');
     if(!root || document.getElementById('afFilters')) return;
-    const cat = document.getElementById('personaFilter');
+    // Do not collapse the Persona filter into the advanced filter section.  By setting
+    // `cat` to null we ensure the persona dropdown stays visible within the Skills tab
+    // rather than being moved into the advanced filters UI (see issue in 24K version).
+    const cat = null; // document.getElementById('personaFilter');
     const skill = document.getElementById('afSkill');
     const search = document.getElementById('afSearch');
     if(!cat && !skill && !search) return;
@@ -7759,6 +7806,430 @@ const ctx2 = null;
     // Light observer to update when external code writes logs
     window.addEventListener('storage', (e)=>{ if(e.key==='logs_v1') render(); });
   })();
+})();
+</script>
+
+
+<script>
+// /* PERSONA_SOURCE_FROM_GOC */ — Persona lấy từ Gốc.html
+(function(){
+  var ARCH = ["Sirene","Void Jester","Strategic Shadow","Strategic Ghost","Omni Mind","Dark Sirene","Core Operator"];
+  function fillPersonaOptions(){
+    var sel = document.getElementById('personaFilter');
+    if(!sel) return;
+    if(sel.children.length<=1){
+      var frag=document.createDocumentFragment();
+      ARCH.forEach(function(p){ frag.appendChild(new Option(p,p)); });
+      sel.appendChild(frag);
+    }
+  }
+  document.addEventListener('DOMContentLoaded', fillPersonaOptions);
+})();
+</script>
+
+
+<script>
+// === Focus Today: chọn thời lượng bằng đồng hồ (HH:MM) + Timer thật ===
+(function(){
+  function $(s, r){ r=r||document; return r.querySelector(s); }
+  function $$(s, r){ r=r||document; return Array.from(r.querySelectorAll(s)); }
+  function getLS(k,d){ try{ var x=JSON.parse(localStorage.getItem(k)||'null'); return (x==null?d:x);}catch(_){ return d; } }
+  function setLS(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(_){ } }
+  function todayStr(){ var d=new Date(); return d.toISOString().slice(0,10); }
+  function weekId(d){ d=d||new Date(); var y=d.getFullYear(); var onejan=new Date(y,0,1); var week=Math.ceil((((d - onejan) / 86400000) + onejan.getDay()+1)/7); return y+'-W'+String(week).padStart(2,'0'); }
+  function toMinutes(hhmm){ if(!hhmm) return 0; var p=hhmm.split(':'); return (parseInt(p[0]||0,10)*60 + parseInt(p[1]||0,10))|0; }
+  function fromMinutes(mins){ mins=Math.max(0,mins|0); var h=String(Math.floor(mins/60)).padStart(2,'0'); var m=String(mins%60).padStart(2,'0'); return h+':'+m; }
+
+  // state per card
+  var timers = new Map(); // el -> {remain, id, running}
+
+  function skillNames(){
+    var skills = getLS('skills_full', getLS('skills', [])) || [];
+    return (skills||[]).map(function(s){ return s.name || s.k || ''; }).filter(Boolean);
+  }
+
+  function overrideSaveHandler(){
+    var btn = $('#btnSaveFocusPlan'); if(!btn) return;
+    var clone = btn.cloneNode(true); btn.parentNode.replaceChild(clone, btn);
+    clone.addEventListener('click', function(){
+      var host = $('#focusCards'); if(!host) return;
+      var names = $$('.focus-card select.focus-skill', host).map(function(sel){ return sel.value; }).filter(Boolean);
+      while (names.length<3) names.push('');
+      var wk = weekId(new Date());
+      var plan = (getLS('weekly_plan_v1', []).find(function(x){return x.week_id===wk;}) || {week_id:wk, actions:[], linked_skills:[]});
+      plan.linked_skills = names.slice(0,3);
+      var arr = getLS('weekly_plan_v1', []);
+      var idx = arr.findIndex(function(x){return x.week_id===wk;});
+      if (idx>=0) arr[idx]=plan; else arr.push(plan);
+      setLS('weekly_plan_v1', arr);
+      try{ alert('Đã lưu danh sách hôm nay.'); }catch(_){}
+    });
+  }
+
+  function startTimer(card){
+    var dur = toMinutes(card.querySelector('input[type=\"time\"]').value);
+    if(!dur){ try{ alert('Chưa chọn thời lượng (HH:MM)'); }catch(_){ } return; }
+    var key = card;
+    var st = timers.get(key) || {remain: dur*60, id: null, running: false};
+    if(!st.running){
+      // nếu mới set dur thì reset remain
+      if(st.remain<=0 || st.remain>dur*60) st.remain = dur*60;
+      st.running = true;
+      st.id = setInterval(function(){
+        st.remain -= 1;
+        updateCountdown(card, st.remain);
+        if(st.remain<=0){
+          clearInterval(st.id); st.id=null; st.running=false; st.remain=0;
+          updateCountdown(card, 0);
+          try{ alert('Hết giờ: '+(card.querySelector('select.focus-skill')?.value||'')); }catch(_){}
+        }
+      }, 1000);
+      timers.set(key, st);
+      updateButtons(card);
+    }
+  }
+  function pauseTimer(card){
+    var st = timers.get(card); if(!st) return;
+    if(st.running){ clearInterval(st.id); st.id=null; st.running=false; updateButtons(card); }
+  }
+  function resetTimer(card){
+    var inp = card.querySelector('input[type=\"time\"]');
+    var dur = toMinutes(inp.value);
+    var st = timers.get(card) || {remain: dur*60, id: null, running:false};
+    if(st.id) clearInterval(st.id);
+    st.remain = dur*60; st.running=false; st.id=null;
+    timers.set(card, st);
+    updateCountdown(card, st.remain);
+    updateButtons(card);
+  }
+  function updateCountdown(card, seconds){
+    seconds = Math.max(0, seconds|0);
+    var el = card.querySelector('.countdown');
+    var m = Math.floor(seconds/60), s = seconds%60;
+    el.textContent = (String(m).padStart(2,'0')+':'+String(s).padStart(2,'0'));
+  }
+  function updateButtons(card){
+    var st = timers.get(card)||{running:false};
+    var btnStart = card.querySelector('.btn-start');
+    var btnPause = card.querySelector('.btn-pause');
+    btnStart.disabled = st.running;
+    btnPause.disabled = !st.running;
+  }
+
+  function quickSave(card){
+    var sel = card.querySelector('select.focus-skill');
+    var name = sel ? sel.value : '';
+    var durMins = toMinutes(card.querySelector('input[type=\"time\"]').value);
+    var energy = Number(card.querySelector('input[name=\"energy\"]')?.value||0);
+    var score = Number(card.querySelector('input[name=\"score\"]')?.value||0);
+    var note = String(card.querySelector('input[name=\"note\"]')?.value||'');
+    var logs = getLS('logs_v1', []);
+    var row = { id: 'L'+Date.now(), date: todayStr(), persona:'', skill:name, cp:[], duration:durMins, score:score, energy:energy, drill:'', note: note+' [focus-today]' };
+    logs.push(row); setLS('logs_v1', logs);
+    try{ alert('Đã lưu nhanh cho '+name+' ('+durMins+'p)'); }catch(_){}
+  }
+
+  window.buildFocusToday = function(){
+    var host = $('#focusCards'); if(!host) return; host.innerHTML='';
+    timers.clear();
+
+    // danh sách đề xuất từ weekly_plan_v1, fallback = 3 skill đầu tiên
+    var wk = weekId(new Date());
+    var plan = (getLS('weekly_plan_v1',[]).find(function(x){return x.week_id===wk;}) || {});
+    var list = plan.linked_skills || [];
+    if(list.length<3){
+      var fallback = getLS('skills_full', getLS('skills', [])) || [];
+      var fallbackNames = fallback.map(function(s){return s.name || s.k || '';}).filter(Boolean);
+      list = (list.concat(fallbackNames)).slice(0,3);
+    }
+    var options = skillNames();
+
+    for (var i=0;i<3;i++){
+      var name = list[i] || '';
+      var card = document.createElement('div'); card.className='col-4 card focus-card';
+      // Build select options
+      var optHtml = '<option value=\"\">— Chọn kỹ năng —</option>' + options.map(function(n){ return '<option'+(n===name?' selected':'')+' value=\"'+n.replace(/\"/g,'&quot;')+'\">'+n+'</option>'; }).join('');
+      card.innerHTML = ''
+        + '<div class=\"row\" style=\"align-items:center;justify-content:space-between\">'
+        + '  <h4 style=\"margin:0\">Slot '+(i+1)+'</h4>'
+        + '  <select class=\"focus-skill\" style=\"min-width:220px\">'+ optHtml +'</select>'
+        + '</div>'
+        + '<div class=\"row\" style=\"gap:.75rem;align-items:center\">'
+        + '  <label class=\"muted small\" style=\"min-width:80px\">Thời lượng</label>'
+        + '  <input type=\"time\" class=\"dur\" step=\"60\" value=\"00:20\">'
+        + '  <span class=\"countdown\" style=\"font-variant-tabular-nums:tabular-nums\">00:20</span>'
+        + '  <button class=\"btn small btn-start\">Bắt đầu</button>'
+        + '  <button class=\"btn small btn-pause\" disabled>Tạm dừng</button>'
+        + '  <button class=\"btn small btn-reset\">Đặt lại</button>'
+        + '</div>'
+        + '<div class=\"row\">'
+        + '  <input name=\"score\" type=\"number\" min=\"0\" max=\"10\" placeholder=\"Điểm (0–10)\" style=\"width:120px\">'
+        + '  <input name=\"energy\" type=\"number\" min=\"0\" max=\"10\" placeholder=\"Năng lượng (0–10)\" style=\"width:140px\">'
+        + '  <input name=\"note\" type=\"text\" placeholder=\"Ghi chú\" style=\"flex:1\">'
+        + '  <button class=\"btn small btn-save\">Lưu nhanh</button>'
+        + '</div>';
+      host.appendChild(card);
+      // init countdown
+      updateCountdown(card, toMinutes(card.querySelector('input[type=\"time\"]').value)*60);
+      // wire up
+      card.querySelector('.btn-start').addEventListener('click', function(e){ startTimer(e.target.closest('.focus-card')); });
+      card.querySelector('.btn-pause').addEventListener('click', function(e){ pauseTimer(e.target.closest('.focus-card')); });
+      card.querySelector('.btn-reset').addEventListener('click', function(e){ resetTimer(e.target.closest('.focus-card')); });
+      card.querySelector('.btn-save').addEventListener('click', function(e){ quickSave(e.target.closest('.focus-card')); });
+      card.querySelector('input[type=\"time\"]').addEventListener('change', function(e){
+        var c = e.target.closest('.focus-card');
+        var st = timers.get(c);
+        if(st && st.running){ pauseTimer(c); }
+        resetTimer(c);
+      });
+    }
+    overrideSaveHandler();
+  };
+
+  // build lại mỗi lần mở modal
+  document.addEventListener('DOMContentLoaded', function(){
+    var btn = document.getElementById('btnFocusToday');
+    var modal = document.getElementById('focusModal');
+    if (btn && modal){
+      btn.addEventListener('click', function(){ try{ buildFocusToday(); }catch(_){ } });
+    }
+  });
+})();
+</script></script>
+
+
+<script>
+// /* KPI_MANAGER_IMPL */ — Quản lý KPI theo Kỹ năng (localStorage: kpi_v1)
+(function(){
+  function $(s, r){ r=r||document; return r.querySelector(s); }
+  function $$(s, r){ r=r||document; return Array.from(r.querySelectorAll(s)); }
+  function getLS(k,d){ try{ var x=JSON.parse(localStorage.getItem(k)||'null'); return (x==null?d:x);}catch(_){ return d; } }
+  function setLS(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(_){ } }
+  function ensureSkills(){
+    var skills = getLS('skills_full', getLS('skills', [])) || [];
+    return (skills||[]).map(function(s){ return s.name||s.k||''; }).filter(Boolean);
+  }
+  function openKPIModal(){
+    var m = $('#kpiModal'); if(!m) return;
+    m.classList.add('open'); m.setAttribute('aria-hidden','false');
+  }
+  function closeKPIModal(){
+    var m = $('#kpiModal'); if(!m) return;
+    m.classList.remove('open'); m.setAttribute('aria-hidden','true');
+  }
+  function fillSkillOptions(){
+    var sel = $('#kpiSkill'); if(!sel) return;
+    var skills = ensureSkills();
+    var val = sel.value;
+    sel.innerHTML = skills.map(function(n){ return '<option value="'+n.replace(/"/g,'&quot;')+'">'+n+'</option>'; }).join('');
+    if (val && skills.indexOf(val)>=0) sel.value = val;
+  }
+  function renderKPIList(){
+    var host = $('#kpiList'); if(!host) return;
+    var list = getLS('kpi_v1', []);
+    if (!Array.isArray(list)) list = [];
+    host.innerHTML = '';
+    if (!list.length){ host.innerHTML = '<div class="muted">Chưa có KPI nào.</div>'; return; }
+    // group by skill
+    var map = {};
+    list.forEach(function(k){ (map[k.skill] = map[k.skill]||[]).push(k); });
+    Object.keys(map).sort().forEach(function(skill){
+      var title = document.createElement('div'); title.className='kitem'; title.innerHTML = '<strong>'+skill+'</strong>';
+      host.appendChild(title);
+      map[skill].forEach(function(k, idx){
+        var row = document.createElement('div'); row.className='kitem';
+        row.innerHTML = '<span>'+k.key+' — '+(k.label||'')+' (target: '+(k.target||'')+(k.unit?(' '+k.unit):'')+')</span>';
+        var del = document.createElement('button'); del.className='btn small'; del.textContent='Xóa';
+        del.addEventListener('click', function(){
+          var arr=getLS('kpi_v1', []);
+          var i = arr.findIndex(function(x){ return x.skill===k.skill && x.key===k.key; });
+          if(i>=0){ arr.splice(i,1); setLS('kpi_v1', arr); renderKPIList(); }
+        });
+        row.appendChild(document.createTextNode(' ')); row.appendChild(del);
+        host.appendChild(row);
+      });
+    });
+  }
+  function addKPI(){
+    var skill = $('#kpiSkill').value;
+    var key = ($('#kpiKey').value||'').trim();
+    var label = ($('#kpiLabel').value||'').trim();
+    var target = ($('#kpiTarget').value||'').trim();
+    var unit = ($('#kpiUnit').value||'').trim();
+    if(!skill || !key){ try{ alert('Chọn kỹ năng và nhập Key.'); }catch(_){ } return; }
+    var arr = getLS('kpi_v1', []); if(!Array.isArray(arr)) arr = [];
+    // upsert by (skill,key)
+    var idx = arr.findIndex(function(x){ return x.skill===skill && x.key===key; });
+    var rec = {skill:skill, key:key, label:label, target:target, unit:unit, active:true, updated:new Date().toISOString()};
+    if(idx>=0) arr[idx]=rec; else arr.push(rec);
+    setLS('kpi_v1', arr);
+    renderKPIList();
+    try{ alert('Đã lưu KPI cho '+skill+': '+key); }catch(_){}
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    var btnOpen = $('#btnKPIManager');
+    var btnClose = $('#btnCloseKPI');
+    var btnAdd = $('#btnAddKPI');
+    if(btnOpen){ btnOpen.addEventListener('click', function(){ fillSkillOptions(); renderKPIList(); openKPIModal(); }); }
+    if(btnClose){ btnClose.addEventListener('click', closeKPIModal); }
+    if(btnAdd){ btnAdd.addEventListener('click', addKPI); }
+  });
+})();
+</script>
+
+
+<script>
+// === Audit UX Patch v1.1 (unify alerts, persist resolve/snooze, toolbar) ===
+(function(){
+  const getLS = (k, d) => { try{ return JSON.parse(localStorage.getItem(k)) ?? d; }catch(_){ return d; } };
+  const setLS = (k, v) => { try{ localStorage.setItem(k, JSON.stringify(v)); }catch(_){ } };
+
+  function normalizeAlert(a){
+    // Radar style
+    if(a && a.type){
+      const map = {no_log:'info', overfocus:'info', energy_drop:'warn'};
+      return { code: String(a.type||'').toUpperCase(), target: a.target||'', sev: map[a.type]||a.sev||'info', source:'radar', date: a.date||new Date().toISOString().slice(0,10) };
+    }
+    // UseCase style
+    return { code: String(a.code||'GEN').toUpperCase(), target: a.target||'', sev: a.sev||'info', source:'usecase', date: a.date||new Date().toISOString().slice(0,10) };
+  }
+  function keyOf(n){ return (n.code||'')+'::'+(n.target||''); }
+
+  function getState(){ return getLS('audit_alert_state', {}); }
+  function setState(s){ setLS('audit_alert_state', s); }
+
+  function inSnooze(state){ if(!state || !state.snooze_until) return false; try{ return new Date(state.snooze_until) > new Date(); }catch(_){ return false; } }
+
+  function unifyAlerts(){
+    const a1 = (getLS('alerts', [])||[]).map(normalizeAlert);
+    const a2 = (getLS('alerts_v1', [])||[]).map(normalizeAlert);
+    const map = {};
+    [...a1, ...a2].forEach(n => { const k = keyOf(n); if(!map[k]) map[k]=n; });
+    const state = getState();
+    const merged = Object.values(map).map(n => {
+      const st = state[keyOf(n)] || {};
+      return { ...n, resolved: !!st.resolved, snooze_until: st.snooze_until || null };
+    });
+    setLS('audit_alerts', merged);
+    // update cards count (unresolved + not snoozed)
+    const count = merged.filter(x => !x.resolved && !inSnooze(x)).length;
+    const el = document.getElementById('p1-alerts'); if(el) el.textContent = String(count);
+    renderUnifiedList(); // refresh radar list as well
+    return merged;
+  }
+
+  function ensureToolbar(){
+    const host = document.getElementById('alertsList'); if(!host || document.getElementById('alertsToolbar')) return;
+    const bar = document.createElement('div'); bar.id='alertsToolbar'; bar.style.margin='6px 0 8px'; bar.style.display='flex'; bar.style.gap='6px'; bar.style.flexWrap='wrap';
+    bar.innerHTML = '<button class="btn small" data-f="all">Tất cả</button>' +
+                    '<button class="btn small" data-f="unresolved">Chưa xử lý</button>' +
+                    '<button class="btn small" data-f="crit">Chỉ cảnh báo mạnh</button>' +
+                    '<button class="btn small" id="btnReloadAlerts">↻ Đồng bộ</button>';
+    host.parentNode.insertBefore(bar, host);
+    bar.addEventListener('click', function(ev){
+      const t = ev.target; if(!(t instanceof HTMLElement)) return;
+      const f = t.getAttribute('data-f'); if(!f) return;
+      bar.setAttribute('data-active', f);
+      renderUnifiedList();
+    });
+    const reload = document.getElementById('btnReloadAlerts');
+    if(reload) reload.addEventListener('click', unifyAlerts);
+  }
+
+  function renderUnifiedList(){
+    ensureToolbar();
+    const host = document.getElementById('alertsList'); if(!host) return;
+    const merged = getLS('audit_alerts', []);
+    const bar = document.getElementById('alertsToolbar');
+    const filter = (bar && bar.getAttribute('data-active')) || 'unresolved';
+    const state = getState();
+
+    function txt(a){
+      if(a.source==='radar'){
+        if(a.code==='NO_LOG') return 'No log >7d — ' + (a.target||'');
+        if(a.code==='ENERGY_DROP') return 'Energy drop — ' + (a.target||'all');
+        if(a.code==='OVERFOCUS') return 'Overfocus — ' + (a.target||'');
+      }
+      return (a.msg || (a.code + (a.target?(' — '+a.target):'')));
+    }
+    function sevBadge(a){
+      const s = (a.sev||'info').toLowerCase();
+      const b = document.createElement('span');
+      b.className = 'badge ' + (s==='warn'?'warn':(s==='crit'?'error':''));
+      b.textContent = s.toUpperCase();
+      b.style.marginRight='8px';
+      return b;
+    }
+    const now = new Date();
+    const filtered = merged.filter(a => {
+      const st = state[keyOf(a)] || {};
+      const snoozed = st.snooze_until && new Date(st.snooze_until) > now;
+      if(filter==='unresolved') return !st.resolved && !snoozed;
+      if(filter==='crit') return (a.sev==='crit' || a.sev==='warn') && !st.resolved && !snoozed;
+      return true;
+    });
+    host.innerHTML = '';
+    if(!filtered.length){ host.appendChild(document.createTextNode('Không có cảnh báo.')); return; }
+    filtered.forEach(a => {
+      const k = keyOf(a);
+      const row = document.createElement('div'); row.className='kitem'; row.style.display='flex'; row.style.alignItems='center'; row.style.justifyContent='space-between'; row.style.gap='8px';
+      const left = document.createElement('div'); left.style.display='flex'; left.style.alignItems='center';
+      left.appendChild(sevBadge(a));
+      const t = document.createElement('span'); t.textContent = txt(a); left.appendChild(t);
+      row.appendChild(left);
+      const right = document.createElement('div'); right.style.display='flex'; right.style.gap='6px';
+      // Resolve
+      const btnR = document.createElement('button'); btnR.className='btn small'; btnR.textContent='Resolve';
+      btnR.addEventListener('click', function(){
+        const st = getState(); st[k] = Object.assign({}, st[k], {resolved:true, snooze_until:null});
+        setState(st); unifyAlerts();
+      });
+      // Snooze 3d
+      const btnS = document.createElement('button'); btnS.className='btn small'; btnS.textContent='Snooze 3d';
+      btnS.addEventListener('click', function(){
+        const until = new Date(); until.setDate(until.getDate()+3);
+        const st = getState(); st[k] = Object.assign({}, st[k], {snooze_until: until.toISOString().slice(0,10)});
+        setState(st); unifyAlerts();
+      });
+      right.appendChild(btnR); right.appendChild(btnS);
+      row.appendChild(right);
+      host.appendChild(row);
+    });
+  }
+
+  // Hook original builders to keep unified store updated
+  const __runAudit = window.runAudit;
+  if(typeof __runAudit === 'function'){
+    window.runAudit = function(){ const res = __runAudit.apply(this, arguments); try{ unifyAlerts(); }catch(_){ } return res; };
+  }
+  const __buildAlerts = window.buildAlerts;
+  if(typeof __buildAlerts === 'function'){
+    window.buildAlerts = function(){ const res = __buildAlerts.apply(this, arguments); try{ unifyAlerts(); }catch(_){ } return res; };
+  }
+
+  // Quick Log -> also append a light log into logs_v1 (for Radar logic to see activity)
+  document.addEventListener('DOMContentLoaded', function(){
+    try{
+      const btn = document.getElementById('btnSaveLog');
+      if(btn && !btn.__patched){
+        btn.__patched = true;
+        btn.addEventListener('click', function(){
+          const q = document.getElementById('quickLog');
+          const text = q ? q.value.trim() : '';
+          if(!text) return;
+          const lv1 = getLS('logs_v1', []);
+          const personaSel = document.getElementById('personaSelect');
+          const persona = personaSel && personaSel.value ? personaSel.value : 'GEN';
+          lv1.push({ date: (new Date()).toISOString().slice(0,10), skill: 'NOTE', energy: 0, persona: persona, note: text });
+          setLS('logs_v1', lv1);
+          // refresh radar if function exists
+          if(typeof buildAlerts === 'function') buildAlerts();
+        }, {capture: true});
+      }
+    }catch(_){}
+    // Initial unify on load (after a tiny tick for original init)
+    setTimeout(unifyAlerts, 200);
+  });
 })();
 </script>
 
